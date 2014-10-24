@@ -27,3 +27,7 @@ proguard/
 
 *.classpath
 project.properties
+
+# Intellij idea
+.idea
+*.iml

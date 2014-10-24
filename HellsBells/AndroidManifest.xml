@@ -27,6 +27,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.aghacks.hellsbells.task.ShakeActivity"
+            android:label="@string/title_activity_shake" >
+        </activity>
+        <activity android:name=".management.AlarmListActivity"/>
     </application>
 
 </manifest>
