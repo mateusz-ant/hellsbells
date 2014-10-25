@@ -1,0 +1,35 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+ 	android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/sky_bgr"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.the_cake.Main" >
+    	
+
+      <!-- 
+        <Button
+            android:id="@+id/buttonv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/button"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="18dp"
+            android:onClick="SwitchVisibility"
+            android:text="visible" />
+             -->
+           
+</RelativeLayout>
+    <com.aghacks.hellsbells.Tapper
+        android:id="@+id/tapper_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+     <ImageView
+         android:id="@+id/Poke"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:src="@anim/poke_anim" />
+</RelativeLayout>

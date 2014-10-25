@@ -31,8 +31,11 @@ public class AlarmListAdapter extends ArrayAdapter<Alarm> {
         TextView itemDays = (TextView) alarmListItem.findViewById(R.id.alarm_list_item_days);
 
         Alarm alarm = alarms.get(position);
+
         itemHours.setText(alarm.getFormattedHours());
         itemDays.setText(alarm.getFormattedDaysOfWeek());
+
+        alarmListItem.setTag(alarm);
 
         return alarmListItem;
     }

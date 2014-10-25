@@ -15,5 +15,7 @@
     <string name="backwards_text2">EditText</string>
     <string name="backwards_button1">Check</string>
     <string name="title_activity_send_sms">SendSMS</string>
+    <string name="title_activity_flip">FlipActivity</string>
+    <string name="flip_task">Flip down your phone or I\'ll punish you!</string>
 
 </resources>

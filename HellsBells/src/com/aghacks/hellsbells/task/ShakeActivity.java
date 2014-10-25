@@ -24,7 +24,7 @@ public class ShakeActivity extends Activity implements SensorEventListener {
 		accelerometer = sensorMgr.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 		setContentView(R.layout.activity_shake);
 		sensorMgr.registerListener(this, accelerometer,
-				SensorManager.SENSOR_DELAY_GAME);
+				SensorManager.SENSOR_DELAY_FASTEST);
 		mAccel = 0.00f;
 		mAccelCurrent = SensorManager.GRAVITY_EARTH;
 		mAccelLast = SensorManager.GRAVITY_EARTH;
@@ -33,7 +33,7 @@ public class ShakeActivity extends Activity implements SensorEventListener {
 	protected void onResume() {
 		super.onResume();
 		sensorMgr.registerListener(this, accelerometer,
-				SensorManager.SENSOR_DELAY_GAME);
+				SensorManager.SENSOR_DELAY_FASTEST);
 	}
 
 	protected void onPause() {
@@ -54,13 +54,14 @@ public class ShakeActivity extends Activity implements SensorEventListener {
 			Toast toast = Toast.makeText(getApplicationContext(),
 					Messages.completedTask, Toast.LENGTH_LONG);
 			toast.show();
-			onDestroy();
-		}
+			finish();
+		} 
 	}
 
 	@Override
 	protected void onDestroy() {
 		setResult(RESULT_OK);
+		sensorMgr.unregisterListener(this);
 		super.onDestroy();
 	}
 

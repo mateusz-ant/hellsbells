@@ -1,0 +1,57 @@
+package com.aghacks.hellsbells;
+
+import java.util.Random;
+
+import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Rect;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.MotionEvent;
+
+
+public class MainActivity extends Activity {
+	public Random generator = new Random();
+    Rect clippingRect = new Rect();
+	Paint paint = new Paint();
+	int ScreenHeight=640;
+	int ScreenWidth=480;
+	int dx=200,dy=200;
+	int CorrectTapped = 0;
+	Bitmap winner;
+	Canvas c =new Canvas();
+	@Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        
+//        tapper = (Tapper)findViewById(R.id.tapperView);
+    }
+	public float Distance(float x,float y){
+    	return (x>y) ? (x-y) : (y-x);
+    }
+	
+	protected void onDraw(Canvas c){
+		
+	}
+    @Override
+	public boolean onTouchEvent(MotionEvent event) {
+		super.onTouchEvent(event);
+		float tappedX = event.getX();
+		float tappedY = event.getY();
+		//ImageView picture = (ImageView)findViewById(R.drawable.bugs);
+		
+		if(event.getActionMasked() == MotionEvent.ACTION_DOWN){
+			if(Distance(tappedX,dx ) < 100  && Distance(tappedY,dy )<100){
+				++CorrectTapped;
+			
+				dx = (int)(generator.nextFloat()-0.5f)*ScreenWidth;
+				dy = (int)(generator.nextFloat()-0.5f)*ScreenHeight;
+			}
+		}
+		return true;
+	}	
+}

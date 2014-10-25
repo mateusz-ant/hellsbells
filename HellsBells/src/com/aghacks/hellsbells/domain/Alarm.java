@@ -1,8 +1,28 @@
 package com.aghacks.hellsbells.domain;
 
-public class Alarm {
-    private AlarmOccurrence occurrence;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.List;
+
+import static java.util.EnumSet.allOf;
+
+public class Alarm implements Serializable {
+
+    private static final long serialVersionUID = -8374023520717177932L;
+
+    private AlarmOccurrence occurrence = new AlarmOccurrence();
     private boolean isActive;
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public AlarmOccurrence getOccurrence() {
         return occurrence;
@@ -23,7 +43,9 @@ public class Alarm {
     public String getFormattedDaysOfWeek() {
         StringBuilder builder = new StringBuilder();
 
-        for (DayOfWeek dayOfWeek : occurrence.getDaysOfWeek()) {
+        ArrayList<DayOfWeek> daysOfWeek = new ArrayList<>(occurrence.getDaysOfWeek());
+        Collections.sort(daysOfWeek);
+        for (DayOfWeek dayOfWeek : daysOfWeek) {
             builder.append(dayOfWeek.getShortcut()).append(" ");
         }
 
@@ -31,6 +53,32 @@ public class Alarm {
     }
 
     public String getFormattedHours() {
-        return String.format("%d:%d", occurrence.getHour(), occurrence.getMinute());
+        return String.format("%d:%02d", occurrence.getHour(), occurrence.getMinute());
+    }
+
+
+    public List<Calendar> getNearestOccurrences() {
+
+        List<Calendar> calendars = new ArrayList<>();
+
+        for (DayOfWeek dayOfWeek : occurrence.getDaysOfWeek()) {
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(System.currentTimeMillis());
+            calendar.set(Calendar.HOUR_OF_DAY, occurrence.getHour());
+            calendar.set(Calendar.MINUTE, occurrence.getMinute());
+            int todayDayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+            int dayDiff =  dayOfWeek.getCalendarOrd() - todayDayOfWeek;
+
+            if (dayDiff < 0) {
+                dayDiff += allOf(DayOfWeek.class).size();
+            }
+
+            calendar.add(Calendar.DAY_OF_MONTH, dayDiff);
+
+            calendars.add(calendar);
+        }
+
+        return calendars;
     }
 }
