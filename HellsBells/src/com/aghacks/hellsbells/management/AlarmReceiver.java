@@ -9,7 +9,6 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.widget.Toast;
-
 import com.aghacks.hellsbells.MainActivity;
 
 public class AlarmReceiver extends BroadcastReceiver {
@@ -28,6 +27,8 @@ public class AlarmReceiver extends BroadcastReceiver {
         String strRingtonePreference = preference.getString("ringtone", "DEFAULT_SOUND");
         Uri sound = Uri.parse(strRingtonePreference);
         Ringtone r = RingtoneManager.getRingtone(context, sound);
-        r.play();
+        if (r != null) {
+            r.play();
+        }
     }
 }
