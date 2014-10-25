@@ -1,0 +1,36 @@
+package com.ex.belltester;
+
+import android.app.Activity;
+import android.content.Context;
+import android.os.Bundle;
+import android.os.Vibrator;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+
+
+public class MainActivity extends Activity {
+	Vibrator vibrator;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.third_activity);
+    	ImageView ref = (ImageView)findViewById(R.id.task);
+    	ref.setVisibility(ImageView.INVISIBLE);
+    }
+    public void Lewy(View v){
+    	//TODO:if
+    	vibrator.cancel();
+    }
+    public void Prawy(View v){
+    	long pattern[] = { 0, 100, 200, 300, 400 };
+    	vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+    	vibrator.vibrate(pattern, 0);
+    }
+    public void drawTaskDone(){
+    	ImageView ref = (ImageView)findViewById(R.id.task);
+    	ref.setVisibility(ImageView.VISIBLE);
+    }
+    
+}
