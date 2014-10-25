@@ -17,7 +17,8 @@ public class PunishmentService extends Service {
             "punishment_inet_download_enabled",
             "punishment_flashlight_enabled",
             "punishment_sounds_enabled",
-            "punishment_rickroll_enabled"
+            "punishment_rickroll_enabled",
+            "punishment_crazy_caller_enabled"
     };
 
     private final Map<String, Class<?>> PUNISHMENT_CONFIG_CLASSES = new HashMap<String, Class<?>>() {
@@ -27,6 +28,7 @@ public class PunishmentService extends Service {
             put(PUNISHMENT_CONFIG[2], FaggotDetector.class);
             put(PUNISHMENT_CONFIG[3], SoundPunishment.class);
             put(PUNISHMENT_CONFIG[4], WallpaperChanger.class);
+            put(PUNISHMENT_CONFIG[5], CrazyCaller.class);
         }
     };
 

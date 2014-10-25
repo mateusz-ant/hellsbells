@@ -69,5 +69,9 @@
                 android:title="Rick Astley wallpaper"
                 android:key="punishment_rickroll_enabled"
                 android:defaultValue="true"/>
+        <CheckBoxPreference
+                android:title="Crazy caller"
+                android:key="punishment_crazy_caller_enabled"
+                android:defaultValue="true"/>
     </PreferenceCategory>
 </PreferenceScreen>
