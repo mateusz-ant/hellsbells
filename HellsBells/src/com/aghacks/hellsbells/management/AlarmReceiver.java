@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
+import com.aghacks.hellsbells.task.ShakeActivity;
 
 public class AlarmReceiver extends BroadcastReceiver {
     @Override
@@ -12,6 +13,9 @@ public class AlarmReceiver extends BroadcastReceiver {
         // here you can start an activity or service depending on your need
         // for ex you can start an activity to vibrate phone or to ring the phone
         // Show the toast  like in above screen shot
+        Intent activityIntent = new Intent(context, ShakeActivity.class);
+        activityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(activityIntent);
         Toast.makeText(context, "EVIL EVIL EVIL", Toast.LENGTH_LONG).show();
     }
 }

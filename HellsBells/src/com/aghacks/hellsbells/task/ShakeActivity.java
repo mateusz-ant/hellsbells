@@ -7,7 +7,6 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.widget.Toast;
-
 import com.aghacks.hellsbells.R;
 
 public class ShakeActivity extends Activity implements SensorEventListener {
@@ -50,7 +49,7 @@ public class ShakeActivity extends Activity implements SensorEventListener {
 		mAccelCurrent = (float) Math.sqrt((double) (x * x + y * y + z * z));
 		float delta = mAccelCurrent - mAccelLast;
 		mAccel = mAccel * 0.9f + delta; // perform low-cut filter
-		if (mAccel > 16) {
+		if (mAccel > 10) {
 			Toast toast = Toast.makeText(getApplicationContext(),
 					Messages.completedTask, Toast.LENGTH_LONG);
 			toast.show();
