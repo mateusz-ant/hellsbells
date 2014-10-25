@@ -7,9 +7,20 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.aghacks.hellsbells.punishments.DownloadFromInternet;
+import com.aghacks.hellsbells.punishments.FaggotDetector;
+import com.aghacks.hellsbells.punishments.SendSMS;
+import com.aghacks.hellsbells.punishments.SoundPunishment;
+import com.aghacks.hellsbells.punishments.WallpaperChanger;
+import com.aghacks.hellsbells.task.Backwards;
+import com.aghacks.hellsbells.task.FlipActivity;
+import com.aghacks.hellsbells.task.MathOperation;
+import com.aghacks.hellsbells.task.ShakeActivity;
+import com.aghacks.hellsbells.task.SiaraActivity;
+import com.aghacks.hellsbells.task.Tapper;
 
 public class MainActivity extends Activity {
 
@@ -23,56 +34,46 @@ public class MainActivity extends Activity {
 
 		SharedPreferences pref = PreferenceManager
 				.getDefaultSharedPreferences(getApplicationContext());
-		LinkedList<String> tasks = new LinkedList<String>();
+		LinkedList<Class> tasks = new LinkedList<Class>();
 		if (pref.getBoolean("task_siara_enabled", false)) {
-			tasks.add("com.aghacks.hellsbells.task.SiaraActivity");
+			tasks.add(SiaraActivity.class);
 		}
-		if (pref.getBoolean("task_shape_enabled", false)) {
-			tasks.add("com.aghacks.hellsbells.task.ShapeActivity");
+		if (pref.getBoolean("task_shakee_enabled", false)) {
+			tasks.add(ShakeActivity.class);
 		}
 		if (pref.getBoolean("task_tap_enabled", false)) {
-			tasks.add("com.aghacks.hellsbells.task.Tapper");
+			tasks.add(Tapper.class);
 		}
 		if (pref.getBoolean("task_flip_enabled", false)) {
-			tasks.add("com.aghacks.hellsbells.task.FlipActivity");
+			tasks.add(FlipActivity.class);
 		}
 		if (pref.getBoolean("task_backwards_enabled", false)) {
-			tasks.add("com.aghacks.hellsbells.task.Backwards");
+			tasks.add(Backwards.class);
 		}
 		if (pref.getBoolean("task_arithmetic_enabled", false)) {
-			tasks.add("com.aghacks.hellsbells.task.MathOption");
+			tasks.add(MathOperation.class);
 		}
 		Random rand = new Random();
-		LinkedList<String> punishments = new LinkedList<String>();
+		LinkedList<Class> punishments = new LinkedList<Class>();
 		if (pref.getBoolean("punishment_sms_enabled", false)) {
-			punishments.add("com.aghacks.hellsbells.punishments.SendSMS");
+			punishments.add(SendSMS.class);
 		}
 		if (pref.getBoolean("punishment_inet_download_enabled", false)) {
-			punishments
-					.add("com.aghacks.hellsbells.punishments.DownloadFromInternet");
+			punishments.add(DownloadFromInternet.class);
 		}
 		if (pref.getBoolean("punishment_flashlight_enabled", false)) {
-			punishments
-					.add("com.aghacks.hellsbells.punishments.FaggotDetector");
+			punishments.add(FaggotDetector.class);
 		}
 		if (pref.getBoolean("punishment_sounds_enabled", false)) {
-			punishments
-					.add("com.aghacks.hellsbells.punishments.SoundPunishment");
+			punishments.add(SoundPunishment.class);
 		}
 		if (pref.getBoolean("punishment_rickroll_enabled", false)) {
-			punishments
-					.add("com.aghacks.hellsbells.punishments.WallpaperChanger");
+			punishments.add(WallpaperChanger.class);
 		}
 
-		try {
-			Class classForTask = Class.forName(tasks.get(rand.nextInt(tasks
-					.size())));
-			classForPunishment = Class.forName(punishments.get(rand
-					.nextInt(punishments.size())));
-		} catch (ClassNotFoundException e) {
-			Log.e(TAG, e.getLocalizedMessage(), e);
-			e.printStackTrace();
-		}
+		Class classForTask = tasks.get(rand.nextInt(tasks.size()));
+		classForPunishment = punishments.get(rand.nextInt(punishments.size()));
+
 	}
 
 	@Override

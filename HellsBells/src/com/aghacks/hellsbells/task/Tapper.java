@@ -18,7 +18,7 @@ import android.widget.ImageView;
 import com.aghacks.hellsbells.R;
 
 
-class Tapper extends Activity {
+public class Tapper extends Activity {
 	boolean created = false;
     public Random generator = new Random();
     Rect clippingRect = new Rect();
