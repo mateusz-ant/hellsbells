@@ -1,0 +1,74 @@
+package com.aghacks.hellsbells;
+
+import java.util.Random;
+
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Rect;
+import android.util.AttributeSet;
+import android.view.MotionEvent;
+import android.view.View;
+
+public class Tapper extends View {
+	boolean created = false;
+    public Random generator = new Random();
+    Rect clippingRect = new Rect();
+	Paint paint = new Paint();
+	int ScreenHeight=640;
+	int ScreenWidth=480;
+	int dx=200,dy=200;
+	int CorrectTapped = 0;
+	Bitmap winner;
+	//constructors:
+	public Tapper(Context context) {
+        super(context);
+    }
+	public Tapper(Context context, AttributeSet set) {
+		super(context, set);
+		initDrawables();
+//		setupQuestion();
+	}
+	public void initDrawables(){
+		winner = BitmapFactory.decodeResource(getResources(), R.drawable.wintask);
+		winner = winner.createScaledBitmap(winner, 400,300,true);
+	}
+	    @Override
+	protected void onDraw(Canvas canvas) {
+		super.onDraw(canvas);
+		canvas.getClipBounds(clippingRect);
+		paint.setColor(Color.RED);
+		
+		canvas.drawCircle(dx, dy, 10, paint);
+		if(CorrectTapped>4)
+			canvas.drawBitmap(winner, 0, 0,null);
+	}
+    public float Distance(float x,float y){
+    	return (x>y) ? (x-y) : (y-x);
+    }
+    @Override
+	public boolean onTouchEvent(MotionEvent event) {
+		super.onTouchEvent(event);
+		float tappedX = event.getX();
+		float tappedY = event.getY();
+		//ImageView picture = (ImageView)findViewById(R.drawable.bugs);
+		
+		if(event.getActionMasked() == MotionEvent.ACTION_DOWN){
+			if(Distance(tappedX,dx ) < 100  && Distance(tappedY,dy )<100){
+				++CorrectTapped;
+				dx = (int)(generator.nextFloat()-0.5f)*ScreenWidth;
+				dy = (int)(generator.nextFloat()-0.5f)*ScreenHeight;
+			}
+		}
+		return true;
+	}	
+}
+class Point{
+	public float x;
+	public float y;
+	public Point(){}
+	
+}

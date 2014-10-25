@@ -1,0 +1,314 @@
+package com.aghacks.hellsbells;
+
+
+import java.util.ArrayList;
+import java.util.Random;
+
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Rect;
+import android.util.AttributeSet;
+import android.view.MotionEvent;
+import android.view.View;
+
+
+public class WhatIsThat extends View {
+	boolean created = false;
+    public Random generator = new Random();
+    Rect clippingRect = new Rect();
+	Paint paint = new Paint();
+	static Bitmap[] BMPS = new Bitmap[12];
+	
+	
+	//constructors:
+	public WhatIsThat(Context context) {
+        super(context);
+    }
+	public WhatIsThat(Context context, AttributeSet set) {
+		super(context, set);
+		initDrawables();
+		setupQuestion();
+	}
+	
+	//initializers:
+    public void setupQuestion(){
+    	Indexes.add(0);
+    	Indexes.add(2);
+    	for(int i=0;i<11;i++){
+        	Indexes.add(Indexes.get(i+1)*2);
+    	}
+    }
+    
+	public void initDrawables(){
+		//textures for fields
+		BMPS[0] = BitmapFactory.decodeResource(getResources(), R.drawable.emptyfield);
+		BMPS[1] = BitmapFactory.decodeResource(getResources(), R.drawable.tex2);
+		BMPS[2] = BitmapFactory.decodeResource(getResources(), R.drawable.tex4);
+		BMPS[3] = BitmapFactory.decodeResource(getResources(), R.drawable.tex8);
+		BMPS[4] = BitmapFactory.decodeResource(getResources(), R.drawable.tex16);
+		BMPS[5] = BitmapFactory.decodeResource(getResources(), R.drawable.tex32);
+		BMPS[6] = BitmapFactory.decodeResource(getResources(), R.drawable.tex64);
+		BMPS[7] = BitmapFactory.decodeResource(getResources(), R.drawable.tex128);
+		BMPS[8] = BitmapFactory.decodeResource(getResources(), R.drawable.tex256);
+		BMPS[9] = BitmapFactory.decodeResource(getResources(), R.drawable.tex512);
+		BMPS[10] = BitmapFactory.decodeResource(getResources(), R.drawable.tex1024);
+		BMPS[11] = BitmapFactory.decodeResource(getResources(), R.drawable.tex2048);
+		//textures for buttons
+		bitmap_down = BitmapFactory.decodeResource(getResources(), R.drawable.down);
+		bitmap_down = bitmap_down.createScaledBitmap(bitmap_down, buttonsize,buttonsize,true);
+		bitmap_up = BitmapFactory.decodeResource(getResources(), R.drawable.up);
+		bitmap_up = bitmap_down.createScaledBitmap(bitmap_up, buttonsize,buttonsize,true);
+		bitmap_left = BitmapFactory.decodeResource(getResources(), R.drawable.left);
+		bitmap_left = bitmap_left.createScaledBitmap(bitmap_left, buttonsize,buttonsize,true);
+		bitmap_right = BitmapFactory.decodeResource(getResources(), R.drawable.right);
+		bitmap_right = bitmap_right.createScaledBitmap(bitmap_right, buttonsize,buttonsize,true);
+		//textures for 
+		OMG = BitmapFactory.decodeResource(getResources(), R.drawable.op);
+		OMG = OMG.createScaledBitmap(OMG, 400,300,true);
+		WINNER = BitmapFactory.decodeResource(getResources(), R.drawable.winner);
+		WINNER = WINNER.createScaledBitmap(WINNER, 400,300,true);
+		
+		for(int i = 0; i < 12;i++){
+			BMPS[i] = BMPS[i].createScaledBitmap(BMPS[i], 100,100,true);
+		}
+	}
+	public void MatchBitmap(Canvas c,int posX, int posY, int val){
+		c.drawBitmap(BMPS[ Indexes.indexOf(val) ], posX,posY, null);
+	}
+	public void setupBoard(){
+        for(int k = 0; k < SIZE; k++)
+            board[k] = new Vector2048(SIZE);
+        for(int j = 0; j < SIZE; j++){
+            for(int k = 0; k < SIZE; k++){
+                board[j].Set(0, k);
+            }
+         board[0].Set(2, 2);
+         board[1].Set(4, 1);
+         board[2].Set(8, 0);
+         board[3].Set(0, 3);
+        }
+        initBoardsMonitor();
+    }
+	public void RestartGame(){
+        for(int j = 0; j < SIZE; j++)
+            for(int k = 0; k < SIZE; k++)
+                board[j].Set(0, k);
+        setAtRandomPosition();
+        setAtRandomPosition();
+        setAtRandomPosition();
+        initBoardsMonitor();
+        FAILGAME = false;
+        WINGAME = false;
+        postInvalidate();
+    }
+	
+    public int RandomColor(){
+    	return generator.nextInt();
+    }
+	public void initBoardsMonitor(){
+        prevBoard = new int[SIZE][SIZE];
+        tmpBoard = new int[SIZE][SIZE];
+        newBoard = new int[SIZE][SIZE];
+        for(int i = 0; i < SIZE; i++){
+            for(int j = 0; j < SIZE; j++){
+                newBoard[i][j] = board[i].vector[j];
+                prevBoard[i][j]= -1;
+                tmpBoard[i][j] = -2;
+            }
+        }
+    }
+    public void updateBoards(){
+        for(int i = 0; i < SIZE; i++){
+            for(int j = 0; j < SIZE; j++){
+                tmpBoard[i][j] = newBoard[i][j];
+                newBoard[i][j] = board[i].vector[j];
+                prevBoard[i][j]=tmpBoard[i][j];
+            }
+        }
+    }
+    public boolean areBoardsEqual(){
+        for(int i = 0; i < SIZE; i++){
+            for(int j = 0; j < SIZE; j++){
+                if(prevBoard[i][j]!=newBoard[i][j])
+                    return false;
+            }
+        }
+        return true;
+    }
+    public void Left(){
+        for(int j = 0; j < SIZE; j++){
+            board[j].Left();
+            board[j].SumAfterLeft();
+        }
+    }
+    public  void Right(){
+        for(int j = 0; j < SIZE; j++){
+            board[j].Right();
+            board[j].SumAfterRight();
+        }
+    }
+    public  void Up(){
+        VerticalMove(true);
+    }
+    public  void Down(){
+        VerticalMove(false);
+    }
+    public  void ShowBoard(){
+        for(int i = 0; i < SIZE;i++){
+            board[i].Show();
+        }
+    }
+    public  void VerticalMove(Boolean direction){
+        int[][] v = new int[SIZE][SIZE];
+        Vector2048[] helpers = new Vector2048[SIZE]; 
+        for(int i = 0; i < SIZE; i++){
+            helpers[i] = new Vector2048(SIZE);
+            for(int j = 0; j < SIZE; j++){
+                v[i][j] = board[j].getValue(i);
+            }
+            helpers[i].SetVect(v[i]);
+                
+            if(direction){
+                helpers[i].Left();
+                helpers[i].SumAfterLeft();
+            }
+            else{
+                helpers[i].Right();
+                helpers[i].SumAfterRight();
+            }
+        }
+        for(int i = 0; i < SIZE; i++){
+            for(int j = 0; j < SIZE; j++){
+                board[i].Set(helpers[j].getValue(i), j);
+            }
+        }
+    }
+    public  boolean BoardFull(){
+        for(int j = 0; j < SIZE; j++){
+            for(int k = 0; k < SIZE; k++){
+                if(board[j].isEmpty(k))
+                    return false;
+            }
+        }
+        return true;
+    }
+    public boolean isGameFinished(){
+    	for(int j = 0; j < SIZE; j++)
+            for(int k = 0; k < SIZE; k++)
+                if(board[j].vector[k] == 2048)
+                	return true;
+        return false;
+    }
+    public void setAtRandomPosition(){
+        if(BoardFull())
+            return;
+        boolean success = false;
+        int dx=0,dy=0;
+        while(!success){
+            dx = generator.nextInt(SIZE);
+            dy = generator.nextInt(SIZE);
+            if(board[dx].isEmpty(dy))
+                success = true;
+        }
+        //TODO: częstość występowania czwórek i dwójek tutaj
+        int val = (generator.nextInt(100)>70) ? 4 : 2;
+        board[dx].Set(val, dy);
+    }
+    @Override
+	protected void onDraw(Canvas canvas) {
+		super.onDraw(canvas);
+		canvas.getClipBounds(clippingRect);
+		super.onDraw(canvas);
+		int WIDTH=100;
+		for(int i=0; i < SIZE;i++){
+			for(int j = 0; j < SIZE; j++){
+				MatchBitmap(canvas, j*WIDTH+marginsize/2, i*WIDTH, board[i].vector[j]);
+			}
+		}
+		canvas.drawBitmap(bitmap_left, 0+marginsize,400+buttonsize/2,null);
+		canvas.drawBitmap(bitmap_right, buttonsize*2+marginsize,400+buttonsize/2,null);
+		canvas.drawBitmap(bitmap_up, buttonsize+marginsize,400,null);
+		canvas.drawBitmap(bitmap_down, buttonsize+marginsize,400+buttonsize,null);
+		if(FAILGAME && !WINGAME)
+			canvas.drawBitmap(OMG, marginsize/2, 0, paint);
+		if(!FAILGAME && WINGAME)
+			canvas.drawBitmap(WINNER, 0+marginsize/2, 0, paint);
+	}
+    @Override
+	public boolean onTouchEvent(MotionEvent event) {
+		super.onTouchEvent(event);
+		float touchX = event.getX();
+		float touchY = event.getY();
+		
+		if(event.getActionMasked() == MotionEvent.ACTION_DOWN){
+			if(!WINGAME && !FAILGAME){
+				if(touchX>0+marginsize && touchX<buttonsize+marginsize && touchY>400){
+					updateBoards();
+			        Left();
+			        updateBoards();
+			        if(!areBoardsEqual()){
+			        	setAtRandomPosition();
+			        	leftMove = true;
+			        }
+			        else
+			        	leftMove = false;
+			        postInvalidate();
+			        
+				}
+				else if(touchX>buttonsize+marginsize && touchX<buttonsize*2 + marginsize
+						&& touchY>400 && touchY<400+buttonsize){
+					updateBoards();
+			        Up();
+			        updateBoards();
+			        if(!areBoardsEqual()){
+			        	setAtRandomPosition();
+			        	upMove = true;
+			        }
+			        else
+			        	upMove = false;
+			        postInvalidate();
+				}
+				else if(touchX>buttonsize+marginsize && touchX<buttonsize*2+marginsize && touchY>400+buttonsize){
+					updateBoards();
+			        Down();
+			        updateBoards();
+			        if(!areBoardsEqual()){
+			        	setAtRandomPosition();
+			        	downMove = true;
+			        }
+			        else
+			        	downMove = false;
+			        postInvalidate();
+				}
+				else if(touchX>buttonsize*2 +marginsize && touchY>400 ){
+					updateBoards();
+			        Right();
+			        updateBoards();
+			        if(!areBoardsEqual()){
+			        	setAtRandomPosition();
+			        	rightMove = true;
+			        }
+			        else //areBoardsEqual()==true
+			        	rightMove = false;
+			        postInvalidate();
+				}
+				if(BoardFull() && !leftMove && !rightMove && !upMove && !downMove && !WINGAME)
+					FAILGAME=true;
+				if(isGameFinished()){
+					FAILGAME = false;
+					WINGAME = true;
+				}
+			}
+		}
+		return true;
+	}	
+}
+class Point{
+	public float x;
+	public float y;
+	public Point(){}
+	
+}
