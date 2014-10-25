@@ -87,6 +87,7 @@
         
         <receiver android:name=".management.AlarmReceiver"
             android:screenOrientation="portrait"/>
+        <service android:name=".punishments.PunishmentService"/>
     </application>
 
 </manifest>

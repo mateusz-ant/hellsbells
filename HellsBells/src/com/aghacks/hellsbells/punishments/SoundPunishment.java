@@ -1,22 +1,15 @@
 package com.aghacks.hellsbells.punishments;
 
-import android.app.Activity;
+import android.content.Context;
 import android.media.MediaPlayer;
-
 import com.aghacks.hellsbells.R;
 
-public class SoundPunishment {
+public class SoundPunishment implements Punishment {
 
-	private Activity context;
-
-	public SoundPunishment(Activity activity) {
-		this.context = activity;
-	}
-
-	public void execute() {
-		MediaPlayer mPlayer = MediaPlayer.create(context, R.raw.sound);
-		mPlayer.setVolume(1.0f, 1.0f);
+    @Override
+    public void punish(Context context) {
+        MediaPlayer mPlayer = MediaPlayer.create(context, R.raw.sound);
+        mPlayer.setVolume(1.0f, 1.0f);
         mPlayer.start();
-	}
-
+    }
 }

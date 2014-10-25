@@ -11,7 +11,7 @@ import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
-import com.aghacks.hellsbells.punishments.*;
+import com.aghacks.hellsbells.punishments.PunishmentService;
 import com.aghacks.hellsbells.task.*;
 
 import java.util.Date;
@@ -55,27 +55,10 @@ public class MainActivity extends Activity {
             if (pref.getBoolean("task_arithmetic_enabled", false)) {
                 tasks.add(MathOperation.class);
             }
-            Random rand = new Random(new Date().getTime());
-            LinkedList<Class> punishments = new LinkedList<Class>();
-            if (pref.getBoolean("punishment_sms_enabled", false)) {
-                punishments.add(SendSMS.class);
-            }
-            if (pref.getBoolean("punishment_inet_download_enabled", false)) {
-                punishments.add(DownloadFromInternet.class);
-            }
-            if (pref.getBoolean("punishment_flashlight_enabled", false)) {
-                punishments.add(FaggotDetector.class);
-            }
-            if (pref.getBoolean("punishment_sounds_enabled", false)) {
-                punishments.add(SoundPunishment.class);
-            }
-            if (pref.getBoolean("punishment_rickroll_enabled", false)) {
-                punishments.add(WallpaperChanger.class);
-            }
 
+            Random rand = new Random(new Date().getTime());
             Class classForTask = tasks.get(rand.nextInt(tasks.size()));
-            classForPunishment = punishments.get(rand.nextInt(punishments
-                    .size()));
+
             Intent intent = new Intent(getApplicationContext(), classForTask);
             intent.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
             startActivityForResult(intent, 1);
@@ -94,7 +77,8 @@ public class MainActivity extends Activity {
             
             finish();
         } else {
-            //   kurwa serwis : classForPunishment
+            Intent intent = new Intent(this, PunishmentService.class);
+            this.startService(intent);
 
         }
         super.onActivityResult(requestCode, resultCode, data);
