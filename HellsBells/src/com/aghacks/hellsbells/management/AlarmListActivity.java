@@ -75,9 +75,16 @@ public class AlarmListActivity extends Activity {
             case R.id.alarm_list_add:
                 addAlarm();
                 return true;
+            case R.id.alarm_list_preferences:
+                goToPreferences();
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void goToPreferences() {
+        Intent intent = new Intent(this, SettingsActivity.class);
+        this.startActivity(intent);
     }
 
     @Override
