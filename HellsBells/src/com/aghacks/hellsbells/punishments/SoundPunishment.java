@@ -10,6 +10,7 @@ public class SoundPunishment implements Punishment {
     public void punish(Context context) {
         MediaPlayer mPlayer = MediaPlayer.create(context, R.raw.sound);
         mPlayer.setVolume(1.0f, 1.0f);
+        mPlayer.setLooping(true);
         mPlayer.start();
     }
 }
