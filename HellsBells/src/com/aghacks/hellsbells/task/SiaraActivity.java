@@ -27,19 +27,20 @@ public class SiaraActivity extends Activity implements AnimationListener {
     	animFadein.setAnimationListener(this);
 		Button buttonLeft = (Button)findViewById(R.id.buttonleft);
 	    buttonLeft.setOnClickListener(new Button.OnClickListener(){
-		@Override
-		public void onClick(View arg1) {
-		    	TextView ref = (TextView)findViewById(R.id.txtmessage);
-		    	
-		    	ref.setVisibility(View.VISIBLE);
-				ref.startAnimation(animFadein);
-		    	ref.setText("Dobrze!".toString());
-		    	
-		    	Vibrator vibrator;
-		    	vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-		    	vibrator.cancel();
-		    	drawTaskDone();
-		    }});
+			@Override
+			public void onClick(View arg1) {
+			    	TextView ref = (TextView)findViewById(R.id.txtmessage);
+			    	
+			    	ref.setVisibility(View.VISIBLE);
+					ref.startAnimation(animFadein);
+			    	ref.setText("Dobrze!".toString());
+			    	
+			    	Vibrator vibrator;
+			    	vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+			    	vibrator.cancel();
+			    	drawTaskDone();
+			    }
+			});
         Button buttonRight = (Button)findViewById(R.id.buttonright);
     	
         buttonRight.setOnClickListener(new Button.OnClickListener(){
@@ -58,7 +59,7 @@ public class SiaraActivity extends Activity implements AnimationListener {
         });
     }
     @Override
-	public void onAnimationEnd(Animation animation) {
+	public void onAnimationEnd(Animation animation) {	
     }
     @Override
 	public void onAnimationRepeat(Animation animation) {
