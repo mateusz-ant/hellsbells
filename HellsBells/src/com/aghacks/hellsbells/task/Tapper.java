@@ -15,9 +15,11 @@ import android.view.animation.Animation.AnimationListener;
 import android.widget.ImageView;
 import com.aghacks.hellsbells.R;
 
-class Tapper extends Activity implements AnimationListener {
+///
+public class Tapper extends Activity implements AnimationListener {
 	Animation animSideDown,animFadeOut;
 	public Random generator = new Random();
+	boolean created = false;
     int ScreenHeight=600;
 	int ScreenWidth=400;
 	float dx=200,dy=200;
@@ -114,6 +116,12 @@ class Tapper extends Activity implements AnimationListener {
         pok1.setAnimation(animFadeOut);
     	ref.startAnimation(animSideDown);
     	finish();
+   }
+    
+    @Override
+    protected void onDestroy() {
+    	setResult(RESULT_OK);
+    	super.onDestroy();
     }
 }
 

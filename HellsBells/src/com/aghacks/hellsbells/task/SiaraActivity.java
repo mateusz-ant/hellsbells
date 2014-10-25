@@ -70,6 +70,13 @@ public class SiaraActivity extends Activity implements AnimationListener {
     public void drawTaskDone(){
     	ImageView ref = (ImageView)findViewById(R.id.task_done);
     	ref.setVisibility(ImageView.VISIBLE);
-		ref.startAnimation(animSideDown);
+    	ref.startAnimation(animSideDown);
+    	finish();
+    }
+    
+    @Override
+    protected void onDestroy() {
+    	setResult(RESULT_OK);
+		super.onDestroy();
     }
 }
