@@ -43,7 +43,7 @@ public class Alarm implements Serializable {
     public String getFormattedDaysOfWeek() {
         StringBuilder builder = new StringBuilder();
 
-        ArrayList<DayOfWeek> daysOfWeek = new ArrayList<>(occurrence.getDaysOfWeek());
+        ArrayList<DayOfWeek> daysOfWeek = new ArrayList<DayOfWeek>(occurrence.getDaysOfWeek());
         Collections.sort(daysOfWeek);
         for (DayOfWeek dayOfWeek : daysOfWeek) {
             builder.append(dayOfWeek.getShortcut()).append(" ");
@@ -59,7 +59,7 @@ public class Alarm implements Serializable {
 
     public List<Calendar> getNearestOccurrences() {
 
-        List<Calendar> calendars = new ArrayList<>();
+        List<Calendar> calendars = new ArrayList<Calendar>();
 
         for (DayOfWeek dayOfWeek : occurrence.getDaysOfWeek()) {
 

@@ -2,6 +2,8 @@ package com.aghacks.hellsbells;
 
 import java.util.Random;
 
+import com.aghacks.hellsbells.punishments.GarbagePunishment;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
@@ -30,8 +32,8 @@ public class MathOperation extends Activity {
 			number2 = r.nextInt(10 - 1) + 1;
 		} while (number1 < number2);
 
-		int operation = r.nextInt(3 - 1) + 1;
-
+		int operation = r.nextInt(3) + 1;
+		
 		switch (operation) {
 		case 1:
 			result = number1 + number2;
