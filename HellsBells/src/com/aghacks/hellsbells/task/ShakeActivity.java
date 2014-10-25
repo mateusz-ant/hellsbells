@@ -75,5 +75,9 @@ public class ShakeActivity extends Activity implements SensorEventListener {
 	@Override
 	public void onAccuracyChanged(Sensor sensor, int accuracy) {
 	}
+	
+	@Override
+    public void onBackPressed() {
+    }
 
 }

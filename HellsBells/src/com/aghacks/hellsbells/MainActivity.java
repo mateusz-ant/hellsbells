@@ -19,9 +19,6 @@ import java.util.LinkedList;
 import java.util.Random;
 
 public class MainActivity extends Activity {
-
-    private static final String TAG = "MainActivity";
-    private Class classForPunishment;
     private Ringtone r;
 
     @Override

@@ -87,4 +87,9 @@ public class SiaraActivity extends Activity implements AnimationListener {
     	super.onDestroy();
     	setResult(RESULT_OK, new Intent());
     }
+    
+    @Override
+    public void onBackPressed() {
+    }
+   
 }

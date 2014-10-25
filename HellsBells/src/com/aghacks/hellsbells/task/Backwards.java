@@ -82,5 +82,9 @@ public class Backwards extends Activity {
 		super.onDestroy();
 		setResult(RESULT_OK, new Intent());
     }
+	
+	@Override
+    public void onBackPressed() {
+    }
 
 }
