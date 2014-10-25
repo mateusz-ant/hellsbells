@@ -2,6 +2,7 @@ package com.aghacks.hellsbells.management;
 
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,10 @@ public class AlarmListAdapter extends ArrayAdapter<Alarm> {
 
         itemHours.setText(alarm.getFormattedHours());
         itemDays.setText(alarm.getFormattedDaysOfWeek());
+        if (!alarm.isActive()) {
+            itemHours.setTextColor(Color.rgb(0x80, 0x80, 0x80));
+            itemDays.setTextColor(Color.rgb(0x80, 0x80, 0x80));
+        }
 
         alarmListItem.setTag(alarm);
 

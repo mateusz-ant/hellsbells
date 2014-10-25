@@ -1,34 +1,35 @@
 package com.aghacks.hellsbells.task;
 
 import java.util.Random;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Rect;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.TextView;
+
 import com.aghacks.hellsbells.R;
+import com.aghacks.hellsbells.domain.MyTimer;
 
-
-public class Tapper extends Activity {
+///
+public class Tapper extends Activity implements AnimationListener {
+	Animation animSideDown,animFadeOut;
+	public Random generator = new Random();
 	boolean created = false;
-    public Random generator = new Random();
-    Rect clippingRect = new Rect();
-	Paint paint = new Paint();
-	int ScreenHeight=600;
+    int ScreenHeight=600;
 	int ScreenWidth=400;
 	float dx=200,dy=200;
 	int CorrectTapped = 0;
-	boolean ispsyduck;
+	boolean ispsyduck=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +41,14 @@ public class Tapper extends Activity {
         pokemon.setVisibility(ImageView.VISIBLE);
         pokemon.setX(dx);
         pokemon.setY(dy);
-        ImageView tasky = (ImageView)findViewById(R.drawable.task_done);
+        animSideDown= AnimationUtils.loadAnimation(getApplicationContext(),
+				R.anim.slide_down);
+        animFadeOut = AnimationUtils.loadAnimation(getApplicationContext(),
+				R.anim.fade_out);
+        
+        TextView tv = (TextView) findViewById(R.id.timer);
+		MyTimer myTimer = new MyTimer(this, tv);
+		myTimer.t.scheduleAtFixedRate(myTimer.task, 0, 1000);
     }
 @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -74,6 +82,7 @@ public class Tapper extends Activity {
 				++CorrectTapped;
 				dx = (generator.nextFloat()-0.5f)*ScreenWidth/2;
 				dy = (generator.nextFloat()-0.5f)*ScreenHeight/2;
+				
 				ref.setX(180+dx);
 				ref.setY(200+dy);
 		        AnimationDrawable anim = (AnimationDrawable)ref.getDrawable();
@@ -92,15 +101,31 @@ public class Tapper extends Activity {
 		}
 		return true;
 	}	
+    @Override
+	public void onAnimationEnd(Animation animation) {
+    	try{
+    		Thread.sleep(10000);
+    	}catch(InterruptedException e){
+    		throw new RuntimeException(e);
+    	}
+    }
+    @Override
+	public void onAnimationRepeat(Animation animation) {}
+	@Override
+	public void onAnimationStart(Animation animation) {}
     public void drawTaskDone(){
     	ImageView ref = (ImageView)findViewById(R.id.task);
+    	ref.setVisibility(ImageView.VISIBLE);
     	ImageView pok1 = (ImageView)findViewById(R.id.psyduck);
         ImageView pok2 = (ImageView)findViewById(R.id.clefairy);
         pok1.setVisibility(ImageView.INVISIBLE);
         pok2.setVisibility(ImageView.INVISIBLE);
-    	ref.setVisibility(ImageView.VISIBLE);
+        ref.setVisibility(ImageView.VISIBLE);
+        pok1 = (ispsyduck) ? pok1 : pok2;
+        pok1.setAnimation(animFadeOut);
+    	ref.startAnimation(animSideDown);
     	finish();
-    }
+   }
     
     @Override
     protected void onDestroy() {
@@ -108,4 +133,3 @@ public class Tapper extends Activity {
     	setResult(RESULT_OK, new Intent());
     }
 }
-

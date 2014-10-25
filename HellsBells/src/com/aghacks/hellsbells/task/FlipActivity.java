@@ -7,9 +7,11 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aghacks.hellsbells.R;
+import com.aghacks.hellsbells.domain.MyTimer;
 
 public class FlipActivity extends Activity implements SensorEventListener {
 	private SensorManager sensorMgr;
@@ -27,6 +29,10 @@ public class FlipActivity extends Activity implements SensorEventListener {
 		sensorMgr.registerListener(this, accelerometer,
 				SensorManager.SENSOR_DELAY_FASTEST);
 		setContentView(R.layout.activity_flip);
+		
+		TextView tv = (TextView) findViewById(R.id.timer);
+		MyTimer myTimer = new MyTimer(this, tv);
+		myTimer.t.scheduleAtFixedRate(myTimer.task, 0, 1000);
 
 	}
 

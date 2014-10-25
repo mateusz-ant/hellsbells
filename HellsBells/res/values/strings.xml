@@ -19,5 +19,6 @@
     <string name="flip_task">Flip down your phone or I\'ll punish you!</string>
     <string name="title_activity_siara">Choose Siara!!</string>
     <string name="title_activity_tapper">Tap, tap, tap!!</string>
+    <string name="timer">0</string>
 
 </resources>

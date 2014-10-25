@@ -24,12 +24,5 @@
             android:layout_below="@id/alarm_list_item_hour"
             android:layout_alignLeft="@id/alarm_list_item_hour"
             android:layout_marginBottom="8dp"/>
-    <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/alarm_list_item_is_active"
-            android:focusable="false" android:checked="false"
-            android:layout_marginRight="15dp" android:layout_alignTop="@+id/alarm_list_item_hour"
-            android:layout_alignParentRight="true"/>
 
 </RelativeLayout>

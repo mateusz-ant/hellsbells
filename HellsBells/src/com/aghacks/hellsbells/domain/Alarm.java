@@ -68,13 +68,17 @@ public class Alarm implements Serializable {
             calendar.set(Calendar.HOUR_OF_DAY, occurrence.getHour());
             calendar.set(Calendar.MINUTE, occurrence.getMinute());
             int todayDayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-            int dayDiff =  dayOfWeek.getCalendarOrd() - todayDayOfWeek;
+            int dayDiff = dayOfWeek.getCalendarOrd() - todayDayOfWeek;
 
             if (dayDiff < 0) {
                 dayDiff += allOf(DayOfWeek.class).size();
             }
 
             calendar.add(Calendar.DAY_OF_MONTH, dayDiff);
+
+            if (calendar.getTimeInMillis() < Calendar.getInstance().getTimeInMillis()) {
+                calendar.add(Calendar.DAY_OF_MONTH, allOf(DayOfWeek.class).size());
+            }
 
             calendars.add(calendar);
         }

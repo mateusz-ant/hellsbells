@@ -2,8 +2,6 @@ package com.aghacks.hellsbells.task;
 
 import java.util.Random;
 
-import com.aghacks.hellsbells.punishments.GarbagePunishment;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.aghacks.hellsbells.R;
+import com.aghacks.hellsbells.domain.MyTimer;
 
 public class MathOperation extends Activity {
 
@@ -24,6 +23,10 @@ public class MathOperation extends Activity {
 
 		TextView answer = (TextView) findViewById(R.id.textView2);
 		Button button = (Button) findViewById(R.id.button1);
+		
+		TextView tv = (TextView) findViewById(R.id.timer);
+		MyTimer myTimer = new MyTimer(this, tv);
+		myTimer.t.scheduleAtFixedRate(myTimer.task, 0, 1000);
 
 		Random r = new Random();
 		int number1;
