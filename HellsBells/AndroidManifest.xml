@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.aghacks.hellsbells"
-    android:versionCode="1"
-    android:versionName="1.0" >
+          package="com.aghacks.hellsbells"
+          android:versionCode="1"
+          android:versionName="1.0">
 
     <uses-sdk
+
         android:minSdkVersion="16"
         android:targetSdkVersion="21" />
-
-    <application
-        android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+	<uses-permission 
+	    android:name="android.permission.VIBRATE"/>
+	<uses-permission 	
+     	android:name="android.permission.SET_WALLPAPER"/>	
+ <application
+            android:allowBackup="true"
+            android:icon="@drawable/ic_launcher"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
@@ -23,8 +27,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".task.ShakeActivity"
-            android:label="@string/title_activity_shake" >
+                android:name=".task.ShakeActivity"
+                android:label="@string/title_activity_shake">
         </activity>
         <activity android:name=".management.AlarmListActivity" />
         <activity
@@ -35,6 +39,7 @@
             android:name=".MathOperation"
             android:label="@string/title_activity_math_operation" >
         </activity>
+        <activity android:name=".management.AlarmDetailsActivity"/>
     </application>
 
 </manifest>

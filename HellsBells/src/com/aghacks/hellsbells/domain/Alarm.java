@@ -1,8 +1,19 @@
 package com.aghacks.hellsbells.domain;
 
-public class Alarm {
-    private AlarmOccurrence occurrence;
+import java.io.Serializable;
+
+public class Alarm implements Serializable {
+    private AlarmOccurrence occurrence = new AlarmOccurrence();
     private boolean isActive;
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public AlarmOccurrence getOccurrence() {
         return occurrence;
