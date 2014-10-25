@@ -23,6 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".management.AlarmListActivity"/>
+        <activity android:name=".management.AlarmDetailsActivity"/>
     </application>
 
 </manifest>
