@@ -1,11 +1,11 @@
 package com.aghacks.hellsbells.domain;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import android.app.Activity;
 import android.preference.PreferenceManager;
 import android.widget.TextView;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MyTimer {
 
@@ -16,7 +16,7 @@ public class MyTimer {
 	public MyTimer(final Activity activity, final TextView tv) {
 
 		time = PreferenceManager.getDefaultSharedPreferences(
-				activity.getApplicationContext()).getInt("Task time", 30);
+				activity.getApplicationContext()).getInt("task_time", 30);
 
 		t = new Timer();
 		task = new TimerTask() {
@@ -31,7 +31,7 @@ public class MyTimer {
 						if (time > 0)
 							time -= 1;
 						else {
-							activity.setResult(activity.RESULT_CANCELED);
+							activity.setResult(Activity.RESULT_CANCELED);
 							activity.finish();
 						}
 					}
