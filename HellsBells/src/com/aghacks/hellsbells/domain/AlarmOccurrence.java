@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class AlarmOccurrence implements Serializable {
-    private Set<DayOfWeek> daysOfWeek = new HashSet<>();
+    private Set<DayOfWeek> daysOfWeek = new HashSet<DayOfWeek>();
     private int hour;
     private int minute;
 

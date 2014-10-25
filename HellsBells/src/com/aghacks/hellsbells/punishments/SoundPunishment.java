@@ -1,4 +1,4 @@
-package com.aghacks.hellsbells.punishment;
+package com.aghacks.hellsbells.punishments;
 
 import android.app.Activity;
 import android.media.MediaPlayer;

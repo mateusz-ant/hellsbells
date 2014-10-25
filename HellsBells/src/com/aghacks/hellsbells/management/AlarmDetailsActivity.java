@@ -102,7 +102,7 @@ public class AlarmDetailsActivity extends Activity {
 
         AlarmOccurrence occurrence = new AlarmOccurrence();
 
-        Set<DayOfWeek> daysOfWeek = new HashSet<>();
+        Set<DayOfWeek> daysOfWeek = new HashSet<DayOfWeek>();
         addDayIfChecked(mondayCheckBox, MONDAY, daysOfWeek);
         addDayIfChecked(tuesdayCheckBox, TUESDAY, daysOfWeek);
         addDayIfChecked(wednesdayCheckBox, WEDNESDAY, daysOfWeek);
