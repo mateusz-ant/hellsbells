@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.aghacks.hellsbells.R;
+import com.aghacks.hellsbells.domain.MyTimer;
 
 public class SiaraActivity  extends Activity {
     @Override
@@ -18,6 +19,10 @@ public class SiaraActivity  extends Activity {
         setContentView(R.layout.activity_main);
         ImageView ref = (ImageView)findViewById(R.id.task_done);
     	ref.setVisibility(ImageView.INVISIBLE);
+    	
+    	TextView tv = (TextView) findViewById(R.id.timer);
+		MyTimer myTimer = new MyTimer(this, tv);
+		myTimer.t.scheduleAtFixedRate(myTimer.task, 0, 1000);
     	
     	Button buttonLeft = (Button)findViewById(R.id.buttonleft);
         buttonLeft.setOnClickListener(new Button.OnClickListener(){

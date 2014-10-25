@@ -1,11 +1,9 @@
 package com.aghacks.hellsbells.task;
 
 import java.util.Random;
+
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.AnimationDrawable;
@@ -15,7 +13,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.widget.ImageView;
+import android.widget.TextView;
+
 import com.aghacks.hellsbells.R;
+import com.aghacks.hellsbells.domain.MyTimer;
 
 
 class Tapper extends Activity {
@@ -40,6 +41,10 @@ class Tapper extends Activity {
         pokemon.setX(dx);
         pokemon.setY(dy);
         ImageView tasky = (ImageView)findViewById(R.drawable.task_done);
+        
+        TextView tv = (TextView) findViewById(R.id.timer);
+		MyTimer myTimer = new MyTimer(this, tv);
+		myTimer.t.scheduleAtFixedRate(myTimer.task, 0, 1000);
     }
 @Override
     public boolean onCreateOptionsMenu(Menu menu) {

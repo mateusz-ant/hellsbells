@@ -17,5 +17,6 @@
     <string name="title_activity_send_sms">SendSMS</string>
     <string name="title_activity_flip">FlipActivity</string>
     <string name="flip_task">Flip down your phone or I\'ll punish you!</string>
+     <string name="timer">0</string>
 
 </resources>
