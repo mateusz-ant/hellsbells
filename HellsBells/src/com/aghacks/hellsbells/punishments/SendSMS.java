@@ -19,7 +19,7 @@ public class SendSMS extends Activity {
 		
 		TextView text = (TextView) findViewById(R.id.textView);
 		text.setText("The message was send to:\n" + data[0]);
-		//sendSMS("881524538", "Hi You got a message!");
+		sendSMS(data[1], "Hi You got a message!");
 		
 	
 	}
