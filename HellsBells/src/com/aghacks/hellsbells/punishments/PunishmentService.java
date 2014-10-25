@@ -38,7 +38,7 @@ public class PunishmentService extends Service {
         SharedPreferences pref = PreferenceManager
                 .getDefaultSharedPreferences(getApplicationContext());
 
-        ArrayList<Class> punishments = new ArrayList<>();
+        ArrayList<Class> punishments = new ArrayList<Class>();
         for (String punishmentKey : PUNISHMENT_CONFIG) {
             if (pref.getBoolean(punishmentKey, false)) {
                 punishments.add(PUNISHMENT_CONFIG_CLASSES.get(punishmentKey));
@@ -64,8 +64,14 @@ public class PunishmentService extends Service {
             Punishment punishment = (Punishment) classForPunishment.getConstructor().newInstance();
             punishment.punish(context);
 
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+        } catch (InstantiationException e) { 
             throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+        	throw new RuntimeException(e);
+        } catch (InvocationTargetException e) {
+        	throw new RuntimeException(e);
+        } catch (NoSuchMethodException e) {
+        	throw new RuntimeException(e);
         }
     }
 
