@@ -26,7 +26,7 @@ public class AlarmRepository {
             SharedPreferences preferences = context.getSharedPreferences(ALL, MODE_PRIVATE);
             Set<String> alarms = preferences.getStringSet(ALL, new HashSet<String>());
             SharedPreferences.Editor editor = preferences.edit();
-            Set<String> newAlarms = new HashSet<>(alarms);
+            Set<String> newAlarms = new HashSet<String>(alarms);
             newAlarms.add(alarm.getId());
 
             editor.putStringSet(ALL, newAlarms);
@@ -63,7 +63,7 @@ public class AlarmRepository {
         SharedPreferences preferences = context.getSharedPreferences(ALL, MODE_PRIVATE);
         Set<String> alarmIds = preferences.getStringSet(ALL, new HashSet<String>());
 
-        ArrayList<Alarm> alarms = new ArrayList<>(alarmIds.size());
+        ArrayList<Alarm> alarms = new ArrayList<Alarm>(alarmIds.size());
 
         for (String alarmId : alarmIds) {
             alarms.add(load(context, alarmId));
@@ -77,7 +77,7 @@ public class AlarmRepository {
         SharedPreferences preferences = context.getSharedPreferences(ALL, MODE_PRIVATE);
         Set<String> alarms = preferences.getStringSet(ALL, new HashSet<String>());
         SharedPreferences.Editor editor = preferences.edit();
-        Set<String> newAlarms = new HashSet<>(alarms);
+        Set<String> newAlarms = new HashSet<String>(alarms);
         newAlarms.remove(alarmId);
 
         editor.putStringSet(ALL, newAlarms);
