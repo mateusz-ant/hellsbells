@@ -1,75 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
-    <CheckBox
-            android:id="@+id/alarm_details_is_active"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Active"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:checked="true"/>
-
-    <TextView
-            android:layout_marginTop="15dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Time"
-            android:id="@+id/alarm_details_time_header"/>
-    <TimePicker
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/alarm_details_time_picker"
-            android:layout_gravity="center_horizontal"/>
-    <TextView
-            android:layout_marginTop="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Days of week"
-            android:id="@+id/alarm_details_days_of_week_header"/>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
     <LinearLayout
-            android:id="@+id/alarm_details_days_of_week"
             android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
         <CheckBox
+                android:id="@+id/alarm_details_is_active"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Monday"
-                android:id="@+id/alarm_details_is_monday" android:checked="true"/>
-        <CheckBox
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Tuesday"
-                android:id="@+id/alarm_details_is_tuesday" android:checked="true"/>
-        <CheckBox
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Wednesday"
-                android:id="@+id/alarm_details_is_wednesday" android:checked="true"/>
-        <CheckBox
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Thursday"
-                android:id="@+id/alarm_details_is_thursday" android:checked="true"/>
-        <CheckBox
+                android:text="Active"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:checked="true"/>
+
+        <TextView
+                android:layout_marginTop="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Friday"
-                android:id="@+id/alarm_details_is_friday" android:checked="true"/>
-        <CheckBox
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Time"
+                android:id="@+id/alarm_details_time_header"/>
+        <TimePicker
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Saturday"
-                android:id="@+id/alarm_details_is_saturday" android:checked="false"/>
-        <CheckBox
+                android:id="@+id/alarm_details_time_picker"
+                android:layout_gravity="center_horizontal"/>
+        <TextView
+                android:layout_marginTop="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sunday"
-                android:id="@+id/alarm_details_is_sunday" android:checked="false"/>
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Days of week"
+                android:id="@+id/alarm_details_days_of_week_header"/>
+        <LinearLayout
+                android:id="@+id/alarm_details_days_of_week"
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+            <CheckBox
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Monday"
+                    android:id="@+id/alarm_details_is_monday" android:checked="true"/>
+            <CheckBox
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Tuesday"
+                    android:id="@+id/alarm_details_is_tuesday" android:checked="true"/>
+            <CheckBox
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Wednesday"
+                    android:id="@+id/alarm_details_is_wednesday" android:checked="true"/>
+            <CheckBox
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Thursday"
+                    android:id="@+id/alarm_details_is_thursday" android:checked="true"/>
+            <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Friday"
+                    android:id="@+id/alarm_details_is_friday" android:checked="true"/>
+            <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Saturday"
+                    android:id="@+id/alarm_details_is_saturday" android:checked="false"/>
+            <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sunday"
+                    android:id="@+id/alarm_details_is_sunday" android:checked="false"/>
+        </LinearLayout>
+
+
     </LinearLayout>
-</LinearLayout>
+</ScrollView>
