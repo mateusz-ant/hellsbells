@@ -3,7 +3,7 @@ package com.aghacks.hellsbells.domain;
 import java.io.Serializable;
 
 public class Alarm implements Serializable {
-    private AlarmOccurrence occurrence;
+    private AlarmOccurrence occurrence = new AlarmOccurrence();
     private boolean isActive;
     private String id;
 

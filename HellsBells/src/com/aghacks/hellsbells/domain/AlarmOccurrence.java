@@ -1,10 +1,11 @@
 package com.aghacks.hellsbells.domain;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 public class AlarmOccurrence implements Serializable {
-    private Set<DayOfWeek> daysOfWeek;
+    private Set<DayOfWeek> daysOfWeek = new HashSet<>();
     private int hour;
     private int minute;
 

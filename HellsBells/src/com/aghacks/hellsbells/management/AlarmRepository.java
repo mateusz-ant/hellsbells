@@ -30,7 +30,7 @@ public class AlarmRepository {
             newAlarms.add(alarm.getId());
 
             editor.putStringSet(ALL, newAlarms);
-            editor.commit();
+            editor.apply();
 
             FileOutputStream fileOutputStream = context.openFileOutput(alarm.getId(), MODE_PRIVATE);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
@@ -51,6 +51,7 @@ public class AlarmRepository {
             objectInputStream.close();
             fileInputStream.close();
         } catch (IOException e) {
+            delete(context, alarmId);
             Log.e(TAG, ";(", e);
         } catch (ClassNotFoundException e) {
             Log.e(TAG, ";((", e);
@@ -69,5 +70,19 @@ public class AlarmRepository {
         }
 
         return alarms;
+    }
+
+    public static void delete(Context context, String alarmId) {
+
+        SharedPreferences preferences = context.getSharedPreferences(ALL, MODE_PRIVATE);
+        Set<String> alarms = preferences.getStringSet(ALL, new HashSet<String>());
+        SharedPreferences.Editor editor = preferences.edit();
+        Set<String> newAlarms = new HashSet<>(alarms);
+        newAlarms.remove(alarmId);
+
+        editor.putStringSet(ALL, newAlarms);
+        editor.apply();
+
+        context.deleteFile(alarmId);
     }
 }

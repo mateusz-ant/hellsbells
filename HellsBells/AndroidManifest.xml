@@ -26,7 +26,7 @@
                 android:name=".task.ShakeActivity"
                 android:label="@string/title_activity_shake">
         </activity>
-        <activity android:name=".management.AlarmListActivity"/>
+        <activity android:name=".management.AlarmListActivity" />
         <activity
                 android:name=".task.FlipActivity"
                 android:label="@string/title_activity_flip">

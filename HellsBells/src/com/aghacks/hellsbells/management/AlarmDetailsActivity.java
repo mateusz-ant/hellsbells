@@ -1,6 +1,7 @@
 package com.aghacks.hellsbells.management;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,10 +14,12 @@ import com.aghacks.hellsbells.domain.Alarm;
 import com.aghacks.hellsbells.domain.AlarmOccurrence;
 import com.aghacks.hellsbells.domain.DayOfWeek;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 import static com.aghacks.hellsbells.domain.DayOfWeek.*;
+import static java.lang.String.valueOf;
 
 public class AlarmDetailsActivity extends Activity {
     private Alarm alarm;
@@ -37,9 +40,16 @@ public class AlarmDetailsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.alarm_details);
 
-        String alarmId = getIntent().getExtras().getString("ALARM_ID");
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        String alarmId = extras != null ? extras.getString("ALARM_ID") : null;
 
-        alarm = AlarmRepository.load(this, alarmId);
+        if (alarmId == null) {
+            alarm = new Alarm();
+            alarm.setId(valueOf(new Date().getTime()));
+        } else {
+            alarm = AlarmRepository.load(this, alarmId);
+        }
         activeCheckBox = (CheckBox) findViewById(R.id.alarm_details_is_active);
 
         timePicker = (TimePicker) findViewById(R.id.alarm_details_time_picker);
