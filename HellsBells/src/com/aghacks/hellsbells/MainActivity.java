@@ -3,6 +3,9 @@ package com.aghacks.hellsbells;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
@@ -19,15 +22,20 @@ public class MainActivity extends Activity {
 
     private static final String TAG = "MainActivity";
     private Class classForPunishment;
+    private Ringtone r;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         if (getIntent().getStringExtra("dupA").equals("dupaDUPA")) {
-
-            SharedPreferences pref = PreferenceManager
+        	SharedPreferences pref = PreferenceManager
                     .getDefaultSharedPreferences(getApplicationContext());
+            String strRingtonePreference = pref.getString("ringtone", "DEFAULT_SOUND");
+            Uri sound = Uri.parse(strRingtonePreference);
+         	r = RingtoneManager.getRingtone(getApplicationContext(), sound);
+            r.play();
+            
             LinkedList<Class> tasks = new LinkedList<Class>();
             if (pref.getBoolean("task_siara_enabled", false)) {
                 tasks.add(SiaraActivity.class);
@@ -81,7 +89,9 @@ public class MainActivity extends Activity {
         Toast toast = Toast.makeText(getApplicationContext(),
                 String.valueOf(resultCode), Toast.LENGTH_LONG);
         toast.show();
+        r.stop();
         if (resultCode == RESULT_OK) {
+            
             finish();
         } else {
             //   kurwa serwis : classForPunishment

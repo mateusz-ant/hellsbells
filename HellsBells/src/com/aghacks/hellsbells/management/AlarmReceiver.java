@@ -24,10 +24,5 @@ public class AlarmReceiver extends BroadcastReceiver {
         activityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(activityIntent);
         Toast.makeText(context, "EVIL EVIL EVIL", Toast.LENGTH_LONG).show();
-        SharedPreferences preference = PreferenceManager.getDefaultSharedPreferences(context);
-        String strRingtonePreference = preference.getString("ringtone", "DEFAULT_SOUND");
-        Uri sound = Uri.parse(strRingtonePreference);
-        Ringtone r = RingtoneManager.getRingtone(context, sound);
-        r.play();
     }
 }
