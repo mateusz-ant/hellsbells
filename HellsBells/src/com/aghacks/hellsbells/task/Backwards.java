@@ -27,7 +27,7 @@ public class Backwards extends Activity {
 		TextView word = (TextView) findViewById(R.id.textView2);
 
 		Random r = new Random();
-		int number1 = (r.nextInt(3 - 1) + 1) - 1;
+		int number1 = r.nextInt(10);
 
 		String[] table = new String[10];
 		table[0] = "tiger";
