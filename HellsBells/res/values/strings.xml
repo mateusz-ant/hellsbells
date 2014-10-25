@@ -7,5 +7,13 @@
     <string name="title_activity_math_operation">MathOperation</string>
     <string name="title_activity_shake">ShakeActivity</string>
     <string name="shake_task">Shake your phone or I\'ll punish you!</string>
+    <string name="title_activity_backwards">Backwards</string>
+    <string name="mathoperation_text1">Answer me:</string>
+    <string name="mathoperation_text2">EditText</string>
+    <string name="mathoperation_button1">Check</string>
+    <string name="backwards_text1">Write word from right to left</string>
+    <string name="backwards_text2">EditText</string>
+    <string name="backwards_button1">Check</string>
+    <string name="title_activity_send_sms">SendSMS</string>
 
 </resources>

@@ -4,14 +4,14 @@
     android:layout_height="match_parent"
     tools:context="${relativePackage}.${activityClass}" >
 
-    <Button
-        android:id="@+id/button1"
+    <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="78dp"
-        android:text="@string/mathoperation_button1" />
+        android:layout_centerVertical="true"
+        android:text="@string/backwards_text2"
+        android:textSize="30sp" />
 
     <TextView
         android:id="@+id/textView1"
@@ -19,9 +19,9 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/textView2"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="54dp"
-        android:text="@string/mathoperation_text1"
-        android:textSize="42sp" />
+        android:layout_marginBottom="46dp"
+        android:text="@string/backwards_text1"
+        android:textSize="24sp" />
 
     <EditText
         android:id="@+id/answer"
@@ -29,22 +29,18 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/button1"
         android:layout_alignParentLeft="true"
-        android:layout_marginBottom="21dp"
+        android:layout_marginBottom="22dp"
         android:ems="10"
-        android:inputType="number"
-        android:textSize="30sp" >
+        android:inputType="text"
+        android:textSize="30sp" />
 
-        <requestFocus />
-    </EditText>
-
-    <TextView
-        android:id="@+id/textView2"
+    <Button
+        android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/answer"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50dp"
-        android:text="@string/mathoperation_text2"
-        android:textSize="30sp" />
+        android:layout_marginBottom="40dp"
+        android:text="@string/backwards_button1" />
 
 </RelativeLayout>
