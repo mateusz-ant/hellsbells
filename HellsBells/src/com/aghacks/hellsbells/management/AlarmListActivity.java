@@ -8,25 +8,33 @@ import com.aghacks.hellsbells.domain.Alarm;
 import com.aghacks.hellsbells.domain.AlarmOccurrence;
 import com.aghacks.hellsbells.domain.DayOfWeek;
 
+import java.util.Date;
 import java.util.EnumSet;
-
-import static com.aghacks.hellsbells.domain.DayOfWeek.*;
-import static java.util.Arrays.asList;
-
+import java.util.List;
 
 public class AlarmListActivity extends Activity {
+    private ListView alarmListView;
+    private AlarmListAdapter adapter;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.alarm_list);
 
-        Alarm alarm1 = getExemplaryAlarm(12, 34, MONDAY, WEDNESDAY, FRIDAY);
-        Alarm alarm2 = getExemplaryAlarm(13, 34, MONDAY, THURSDAY, FRIDAY);
+        alarmListView = (ListView) findViewById(R.id.alarm_list);
+    }
 
-        AlarmListAdapter adapter = new AlarmListAdapter(this, asList(alarm1, alarm2));
+    @Override
+    protected void onResume() {
+        super.onResume();
+        List<Alarm> alarms = AlarmRepository.loadAll(this);
 
-        ListView alarmList = (ListView) findViewById(R.id.alarm_list);
-        alarmList.setAdapter(adapter);
+        adapter = new AlarmListAdapter(this, AlarmRepository.loadAll(this));
+        adapter.notifyDataSetChanged();
+
+        alarmListView.setAdapter(adapter);
+
+        alarmListView.setOnItemClickListener(new OnAlarmClickListener(this, alarms));
     }
 
     private Alarm getExemplaryAlarm(int hour, int minute, DayOfWeek first, DayOfWeek... others) {
@@ -36,9 +44,13 @@ public class AlarmListActivity extends Activity {
         occurrence.setMinute(minute);
 
         Alarm alarm = new Alarm();
+        alarm.setId(String.valueOf(new Date().getTime()));
         alarm.setActive(true);
         alarm.setOccurrence(occurrence);
 
+        AlarmRepository.save(this, alarm);
+
         return alarm;
     }
+
 }

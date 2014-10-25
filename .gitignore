@@ -25,6 +25,9 @@ proguard/
 # Log Files
 *.log
 
+*.classpath
+project.properties
+
 # Intellij idea
 .idea
 *.iml

@@ -4,7 +4,10 @@
     <string name="app_name">HellsBells</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_math_operation">MathOperation</string>
     <string name="title_activity_shake">ShakeActivity</string>
     <string name="shake_task">Shake your phone or I\'ll punish you!</string>
+    <string name="title_activity_flip">FlipActivity</string>
+    <string name="flip_task">Flip down your phone or I\'ll punish you!</string>
 
 </resources>

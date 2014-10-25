@@ -10,12 +10,12 @@ import android.widget.Toast;
 
 import com.aghacks.hellsbells.R;
 
-public class ShakeActivity extends Activity implements SensorEventListener {
+public class FlipActivity extends Activity implements SensorEventListener {
 	private SensorManager sensorMgr;
 	private Sensor accelerometer;
-	private float mAccel; // acceleration apart from gravity
-	private float mAccelCurrent; // current acceleration including gravity
-	private float mAccelLast; // last acceleration including gravity
+	private float mGZ = 0;// gravity acceleration along the z axis
+	private int mEventCountSinceGZChanged = 0;
+	private static final int MAX_COUNT_GZ_CHANGE = 10;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +25,8 @@ public class ShakeActivity extends Activity implements SensorEventListener {
 		setContentView(R.layout.activity_shake);
 		sensorMgr.registerListener(this, accelerometer,
 				SensorManager.SENSOR_DELAY_FASTEST);
-		mAccel = 0.00f;
-		mAccelCurrent = SensorManager.GRAVITY_EARTH;
-		mAccelLast = SensorManager.GRAVITY_EARTH;
+		setContentView(R.layout.activity_flip);
+
 	}
 
 	protected void onResume() {
@@ -42,23 +41,6 @@ public class ShakeActivity extends Activity implements SensorEventListener {
 	}
 
 	@Override
-	public void onSensorChanged(SensorEvent event) {
-		float x = event.values[0];
-		float y = event.values[1];
-		float z = event.values[2];
-		mAccelLast = mAccelCurrent;
-		mAccelCurrent = (float) Math.sqrt((double) (x * x + y * y + z * z));
-		float delta = mAccelCurrent - mAccelLast;
-		mAccel = mAccel * 0.9f + delta; // perform low-cut filter
-		if (mAccel > 16) {
-			Toast toast = Toast.makeText(getApplicationContext(),
-					Messages.completedTask, Toast.LENGTH_LONG);
-			toast.show();
-			onDestroy();
-		}
-	}
-
-	@Override
 	protected void onDestroy() {
 		setResult(RESULT_OK);
 		sensorMgr.unregisterListener(this);
@@ -66,7 +48,33 @@ public class ShakeActivity extends Activity implements SensorEventListener {
 	}
 
 	@Override
-	public void onAccuracyChanged(Sensor sensor, int accuracy) {
+	public void onSensorChanged(SensorEvent event) {
+		float gz = event.values[2];
+		if (mGZ == 0) {
+			mGZ = gz;
+		} else {
+			if ((mGZ * gz) < 0) {
+				mEventCountSinceGZChanged++;
+				if (mEventCountSinceGZChanged == MAX_COUNT_GZ_CHANGE) {
+					mGZ = gz;
+					mEventCountSinceGZChanged = 0;
+					if (gz < 0) {
+						Toast toast = Toast.makeText(getApplicationContext(),
+								Messages.completedTask, Toast.LENGTH_LONG);
+						toast.show();
+						onDestroy();
+					}
+				}
+			} else {
+				if (mEventCountSinceGZChanged > 0) {
+					mGZ = gz;
+					mEventCountSinceGZChanged = 0;
+				}
+			}
+		}
 	}
 
+	@Override
+	public void onAccuracyChanged(Sensor sensor, int accuracy) {
+	}
 }
