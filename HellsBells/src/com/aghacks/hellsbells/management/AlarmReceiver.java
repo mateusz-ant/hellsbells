@@ -9,7 +9,6 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.widget.Toast;
-
 import com.aghacks.hellsbells.MainActivity;
 
 public class AlarmReceiver extends BroadcastReceiver {

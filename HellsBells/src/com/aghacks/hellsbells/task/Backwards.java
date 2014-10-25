@@ -10,12 +10,10 @@ import android.widget.TextView;
 import com.aghacks.hellsbells.R;
 import com.aghacks.hellsbells.domain.MyTimer;
 
+import java.util.Date;
 import java.util.Random;
 
 public class Backwards extends Activity {
-
-	
-	int time = 60;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +24,7 @@ public class Backwards extends Activity {
 		Button button = (Button) findViewById(R.id.button1);
 		TextView word = (TextView) findViewById(R.id.textView2);
 
-		Random r = new Random();
+		Random r = new Random(new Date().getTime());
 		int number1 = r.nextInt(10);
 
 		String[] table = new String[10];
