@@ -60,6 +60,7 @@ public class ShakeActivity extends Activity implements SensorEventListener {
 			Toast toast = Toast.makeText(getApplicationContext(),
 					Messages.completedTask, Toast.LENGTH_LONG);
 			toast.show();
+            setResult(RESULT_OK, new Intent());
 			finish();
 		} 
 	}

@@ -1,7 +1,5 @@
 package com.aghacks.hellsbells.task;
 
-import java.util.Random;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -16,9 +14,10 @@ import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.aghacks.hellsbells.R;
 import com.aghacks.hellsbells.domain.MyTimer;
+
+import java.util.Random;
 
 ///
 public class Tapper extends Activity implements AnimationListener {
@@ -124,6 +123,7 @@ public class Tapper extends Activity implements AnimationListener {
         pok1 = (ispsyduck) ? pok1 : pok2;
         pok1.setAnimation(animFadeOut);
     	ref.startAnimation(animSideDown);
+        setResult(RESULT_OK, new Intent());
     	finish();
    }
     

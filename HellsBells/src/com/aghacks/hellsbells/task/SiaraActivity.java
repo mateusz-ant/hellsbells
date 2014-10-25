@@ -12,7 +12,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.aghacks.hellsbells.R;
 import com.aghacks.hellsbells.domain.MyTimer;
 
@@ -79,6 +78,7 @@ public class SiaraActivity extends Activity implements AnimationListener {
     	ImageView ref = (ImageView)findViewById(R.id.task_done);
     	ref.setVisibility(ImageView.VISIBLE);
     	ref.startAnimation(animSideDown);
+        setResult(RESULT_OK, new Intent());
     	finish();
     }
     

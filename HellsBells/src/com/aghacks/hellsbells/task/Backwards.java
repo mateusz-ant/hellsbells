@@ -1,9 +1,5 @@
 package com.aghacks.hellsbells.task;
 
-import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,9 +7,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import com.aghacks.hellsbells.R;
 import com.aghacks.hellsbells.domain.MyTimer;
+
+import java.util.Random;
 
 public class Backwards extends Activity {
 
@@ -69,6 +66,7 @@ public class Backwards extends Activity {
 				String text = textfield.getText().toString();
 
 				if (text.equals(result)) {
+                    setResult(RESULT_OK, new Intent());
 					finish();
 				} else
 					answer.setText("Try again!");

@@ -1,7 +1,5 @@
 package com.aghacks.hellsbells.task;
 
-import java.util.Random;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,9 +7,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import com.aghacks.hellsbells.R;
 import com.aghacks.hellsbells.domain.MyTimer;
+
+import java.util.Date;
+import java.util.Random;
 
 public class MathOperation extends Activity {
 
@@ -28,7 +28,7 @@ public class MathOperation extends Activity {
 		MyTimer myTimer = new MyTimer(this, tv);
 		myTimer.t.scheduleAtFixedRate(myTimer.task, 0, 1000);
 
-		Random r = new Random();
+		Random r = new Random(new Date().getTime());
 		int number1;
 		int number2;
 		final int result;
@@ -69,6 +69,7 @@ public class MathOperation extends Activity {
 					int text = Integer.parseInt(textfield.getText().toString());
 
 					if (text == result) {
+                        setResult(RESULT_OK, new Intent());
 						finish();
 					} else {
 						answer.setText("Try again!");

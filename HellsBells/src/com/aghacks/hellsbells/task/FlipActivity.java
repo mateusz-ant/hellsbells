@@ -9,7 +9,6 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.aghacks.hellsbells.R;
 import com.aghacks.hellsbells.domain.MyTimer;
 
@@ -69,6 +68,7 @@ public class FlipActivity extends Activity implements SensorEventListener {
 						Toast toast = Toast.makeText(getApplicationContext(),
 								Messages.completedTask, Toast.LENGTH_LONG);
 						toast.show();
+                        setResult(RESULT_OK, new Intent());
 						finish();
 					}
 				}
