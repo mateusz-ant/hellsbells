@@ -1,5 +1,9 @@
 package com.aghacks.hellsbells;
 
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.Random;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,12 +15,18 @@ import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
-import com.aghacks.hellsbells.punishments.*;
-import com.aghacks.hellsbells.task.*;
 
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.Random;
+import com.aghacks.hellsbells.punishments.DownloadFromInternet;
+import com.aghacks.hellsbells.punishments.FaggotDetector;
+import com.aghacks.hellsbells.punishments.SendSMS;
+import com.aghacks.hellsbells.punishments.SoundPunishment;
+import com.aghacks.hellsbells.punishments.WallpaperChanger;
+import com.aghacks.hellsbells.task.Backwards;
+import com.aghacks.hellsbells.task.FlipActivity;
+import com.aghacks.hellsbells.task.MathOperation;
+import com.aghacks.hellsbells.task.ShakeActivity;
+import com.aghacks.hellsbells.task.SiaraActivity;
+import com.aghacks.hellsbells.task.Tapper;
 
 public class MainActivity extends Activity {
 

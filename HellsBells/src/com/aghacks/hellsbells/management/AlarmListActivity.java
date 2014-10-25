@@ -1,23 +1,28 @@
 package com.aghacks.hellsbells.management;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.*;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import com.aghacks.hellsbells.R;
-import com.aghacks.hellsbells.domain.Alarm;
-import com.aghacks.hellsbells.domain.AlarmOccurrence;
-import com.aghacks.hellsbells.domain.DayOfWeek;
-import com.aghacks.hellsbells.utils.AlarmListComparator;
+import static java.lang.String.valueOf;
 
 import java.util.Collections;
 import java.util.Date;
 import java.util.EnumSet;
 import java.util.List;
 
-import static java.lang.String.valueOf;
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+
+import com.aghacks.hellsbells.R;
+import com.aghacks.hellsbells.domain.Alarm;
+import com.aghacks.hellsbells.domain.AlarmOccurrence;
+import com.aghacks.hellsbells.domain.DayOfWeek;
+import com.aghacks.hellsbells.utils.AlarmListComparator;
 
 public class AlarmListActivity extends Activity {
     private ListView alarmListView;
