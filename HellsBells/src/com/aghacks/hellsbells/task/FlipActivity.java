@@ -62,7 +62,7 @@ public class FlipActivity extends Activity implements SensorEventListener {
 						Toast toast = Toast.makeText(getApplicationContext(),
 								Messages.completedTask, Toast.LENGTH_LONG);
 						toast.show();
-						onDestroy();
+						finish();
 					}
 				}
 			} else {
