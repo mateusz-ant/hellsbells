@@ -14,20 +14,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@anim/psy_anim" 
-        android:visibility="invisible"/>
+        android:visibility="gone"/>
     <ImageView
         android:id="@+id/clefairy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@anim/poke_anim" 
-        android:visibility="invisible"/>
+        android:visibility="gone"/>
     
     <ImageView
         android:id="@+id/task"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/task_done"
-        android:visibility="invisible"/>
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/timer"

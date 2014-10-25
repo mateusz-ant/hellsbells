@@ -61,6 +61,7 @@
         
         <activity android:name=".task.ShakeActivity" 
             	  android:label="@string/title_activity_shake"/>
+        <activity android:name=".punishments.FaggotDetector" />
 
         <receiver android:name=".management.SetAlarmsOnBoot"/>
         

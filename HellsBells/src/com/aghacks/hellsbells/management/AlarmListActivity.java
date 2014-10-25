@@ -10,7 +10,9 @@ import com.aghacks.hellsbells.R;
 import com.aghacks.hellsbells.domain.Alarm;
 import com.aghacks.hellsbells.domain.AlarmOccurrence;
 import com.aghacks.hellsbells.domain.DayOfWeek;
+import com.aghacks.hellsbells.utils.AlarmListComparator;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.EnumSet;
 import java.util.List;
@@ -34,7 +36,8 @@ public class AlarmListActivity extends Activity {
         super.onResume();
         List<Alarm> alarms = AlarmRepository.loadAll(this);
 
-        adapter = new AlarmListAdapter(this, AlarmRepository.loadAll(this));
+        Collections.sort(alarms, new AlarmListComparator());
+        adapter = new AlarmListAdapter(this, alarms);
         adapter.notifyDataSetChanged();
 
         alarmListView.setAdapter(adapter);
