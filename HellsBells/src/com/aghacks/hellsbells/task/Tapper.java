@@ -98,6 +98,13 @@ class Tapper extends Activity {
         pok1.setVisibility(ImageView.INVISIBLE);
         pok2.setVisibility(ImageView.INVISIBLE);
     	ref.setVisibility(ImageView.VISIBLE);
+    	finish();
+    }
+    
+    @Override
+    protected void onDestroy() {
+    	setResult(RESULT_OK);
+    	super.onDestroy();
     }
 }
 

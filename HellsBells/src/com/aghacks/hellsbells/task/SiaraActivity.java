@@ -47,5 +47,12 @@ public class SiaraActivity  extends Activity {
     public void drawTaskDone(){
     	ImageView ref = (ImageView)findViewById(R.id.task_done);
     	ref.setVisibility(ImageView.VISIBLE);
+    	finish();
+    }
+    
+    @Override
+    protected void onDestroy() {
+    	setResult(RESULT_OK);
+    	super.onDestroy();
     }
 }
