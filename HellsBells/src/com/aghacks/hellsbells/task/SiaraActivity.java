@@ -2,16 +2,18 @@ package com.aghacks.hellsbells.task;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
-import com.aghacks.hellsbells.R;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.aghacks.hellsbells.R;
 
 public class SiaraActivity extends Activity implements AnimationListener {
 	Animation animFadein,animSideDown;
@@ -75,7 +77,7 @@ public class SiaraActivity extends Activity implements AnimationListener {
     
     @Override
     protected void onDestroy() {
-    	setResult(RESULT_OK);
-		super.onDestroy();
+    	super.onDestroy();
+    	setResult(RESULT_OK, new Intent());
     }
 }

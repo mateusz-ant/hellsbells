@@ -1,6 +1,7 @@
 package com.aghacks.hellsbells.task;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -42,9 +43,9 @@ public class FlipActivity extends Activity implements SensorEventListener {
 
 	@Override
 	protected void onDestroy() {
-		setResult(RESULT_OK);
-		sensorMgr.unregisterListener(this);
 		super.onDestroy();
+		sensorMgr.unregisterListener(this);
+		setResult(RESULT_OK, new Intent());
 	}
 
 	@Override

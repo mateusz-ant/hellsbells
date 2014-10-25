@@ -47,6 +47,14 @@
                 android:label="@string/title_activity_flip">
         </activity>
         <activity
+            android:name=".task.SiaraActivity"
+            android:label="@string/title_activity_siara">
+        </activity>
+        <activity 
+            android:name=".task.Tapper"
+            android:label="@string/title_activity_tapper">
+        </activity>
+        <activity
                 android:name=".task.Backwards"
                 android:label="@string/title_activity_backwards">
         </activity>

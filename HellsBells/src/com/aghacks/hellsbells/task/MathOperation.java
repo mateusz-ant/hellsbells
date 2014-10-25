@@ -5,6 +5,7 @@ import java.util.Random;
 import com.aghacks.hellsbells.punishments.GarbagePunishment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -80,8 +81,8 @@ public class MathOperation extends Activity {
 
 	@Override
 	protected void onDestroy() {
-		setResult(RESULT_OK);
 		super.onDestroy();
+		setResult(RESULT_OK, new Intent());
 	}
 
 }

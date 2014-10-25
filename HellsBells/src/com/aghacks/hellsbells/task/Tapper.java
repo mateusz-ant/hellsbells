@@ -3,6 +3,7 @@ package com.aghacks.hellsbells.task;
 import java.util.Random;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -103,8 +104,8 @@ public class Tapper extends Activity {
     
     @Override
     protected void onDestroy() {
-    	setResult(RESULT_OK);
     	super.onDestroy();
+    	setResult(RESULT_OK, new Intent());
     }
 }
 

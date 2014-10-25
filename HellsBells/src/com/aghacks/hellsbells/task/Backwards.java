@@ -3,6 +3,7 @@ package com.aghacks.hellsbells.task;
 import java.util.Random;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -73,7 +74,7 @@ public class Backwards extends Activity {
 	
 	@Override
     protected void onDestroy() {
-		setResult(RESULT_OK);
 		super.onDestroy();
+		setResult(RESULT_OK, new Intent());
     }
 }

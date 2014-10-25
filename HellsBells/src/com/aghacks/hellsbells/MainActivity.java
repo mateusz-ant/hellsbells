@@ -4,11 +4,13 @@ import java.util.LinkedList;
 import java.util.Random;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.aghacks.hellsbells.punishments.DownloadFromInternet;
 import com.aghacks.hellsbells.punishments.FaggotDetector;
@@ -18,6 +20,7 @@ import com.aghacks.hellsbells.punishments.WallpaperChanger;
 import com.aghacks.hellsbells.task.Backwards;
 import com.aghacks.hellsbells.task.FlipActivity;
 import com.aghacks.hellsbells.task.MathOperation;
+import com.aghacks.hellsbells.task.Messages;
 import com.aghacks.hellsbells.task.ShakeActivity;
 import com.aghacks.hellsbells.task.SiaraActivity;
 import com.aghacks.hellsbells.task.Tapper;
@@ -30,50 +33,69 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
 
-		SharedPreferences pref = PreferenceManager
-				.getDefaultSharedPreferences(getApplicationContext());
-		LinkedList<Class> tasks = new LinkedList<Class>();
-		if (pref.getBoolean("task_siara_enabled", false)) {
-			tasks.add(SiaraActivity.class);
-		}
-		if (pref.getBoolean("task_shakee_enabled", false)) {
-			tasks.add(ShakeActivity.class);
-		}
-		if (pref.getBoolean("task_tap_enabled", false)) {
-			tasks.add(Tapper.class);
-		}
-		if (pref.getBoolean("task_flip_enabled", false)) {
-			tasks.add(FlipActivity.class);
-		}
-		if (pref.getBoolean("task_backwards_enabled", false)) {
-			tasks.add(Backwards.class);
-		}
-		if (pref.getBoolean("task_arithmetic_enabled", false)) {
-			tasks.add(MathOperation.class);
-		}
-		Random rand = new Random();
-		LinkedList<Class> punishments = new LinkedList<Class>();
-		if (pref.getBoolean("punishment_sms_enabled", false)) {
-			punishments.add(SendSMS.class);
-		}
-		if (pref.getBoolean("punishment_inet_download_enabled", false)) {
-			punishments.add(DownloadFromInternet.class);
-		}
-		if (pref.getBoolean("punishment_flashlight_enabled", false)) {
-			punishments.add(FaggotDetector.class);
-		}
-		if (pref.getBoolean("punishment_sounds_enabled", false)) {
-			punishments.add(SoundPunishment.class);
-		}
-		if (pref.getBoolean("punishment_rickroll_enabled", false)) {
-			punishments.add(WallpaperChanger.class);
-		}
+		if (getIntent().getStringExtra("dupA").equals("dupaDUPA")) {
 
-		Class classForTask = tasks.get(rand.nextInt(tasks.size()));
-		classForPunishment = punishments.get(rand.nextInt(punishments.size()));
+			SharedPreferences pref = PreferenceManager
+					.getDefaultSharedPreferences(getApplicationContext());
+			LinkedList<Class> tasks = new LinkedList<Class>();
+			if (pref.getBoolean("task_siara_enabled", false)) {
+				tasks.add(SiaraActivity.class);
+			}
+			if (pref.getBoolean("task_shake_enabled", false)) {
+				tasks.add(ShakeActivity.class);
+			}
+			if (pref.getBoolean("task_tap_enabled", false)) {
+				tasks.add(Tapper.class);
+			}
+			if (pref.getBoolean("task_flip_enabled", false)) {
+				tasks.add(FlipActivity.class);
+			}
+			if (pref.getBoolean("task_backwards_enabled", false)) {
+				tasks.add(Backwards.class);
+			}
+			if (pref.getBoolean("task_arithmetic_enabled", false)) {
+				tasks.add(MathOperation.class);
+			}
+			Random rand = new Random();
+			LinkedList<Class> punishments = new LinkedList<Class>();
+			if (pref.getBoolean("punishment_sms_enabled", false)) {
+				punishments.add(SendSMS.class);
+			}
+			if (pref.getBoolean("punishment_inet_download_enabled", false)) {
+				punishments.add(DownloadFromInternet.class);
+			}
+			if (pref.getBoolean("punishment_flashlight_enabled", false)) {
+				punishments.add(FaggotDetector.class);
+			}
+			if (pref.getBoolean("punishment_sounds_enabled", false)) {
+				punishments.add(SoundPunishment.class);
+			}
+			if (pref.getBoolean("punishment_rickroll_enabled", false)) {
+				punishments.add(WallpaperChanger.class);
+			}
 
+			Class classForTask = tasks.get(rand.nextInt(tasks.size()));
+			classForPunishment = punishments.get(rand.nextInt(punishments
+					.size()));
+			startActivityForResult(new Intent(this, classForTask), 1);
+		} else {
+			finish();
+		}
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		Toast toast = Toast.makeText(getApplicationContext(),
+				String.valueOf(resultCode), Toast.LENGTH_LONG);
+		toast.show();
+		if (resultCode == RESULT_OK || resultCode == RESULT_FIRST_USER) {
+			finish();
+		} else {
+			// odpal kurwa serwis : classForPunishment
+
+		}
+		super.onActivityResult(requestCode, resultCode, data);
 	}
 
 	@Override
