@@ -30,50 +30,63 @@
             android:theme="@style/AppTheme">
         <activity
                 android:name=".MainActivity"
+                android:screenOrientation="portrait"
                 android:label="@string/app_name">
         </activity>
         <activity
                 android:name=".task.MathOperation"
+                android:screenOrientation="portrait"
                 android:label="@string/title_activity_math_operation">
-                <intent-filter>
+        </activity>
+        <activity android:name=".management.AlarmListActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".management.AlarmListActivity">
-            
-        </activity>
         <activity
                 android:name=".task.FlipActivity"
-                android:label="@string/title_activity_flip">
+                android:label="@string/title_activity_flip"
+                android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".task.SiaraActivity"
-            android:label="@string/title_activity_siara">
+            android:label="@string/title_activity_siara"
+            android:screenOrientation="portrait">
         </activity>
         <activity 
             android:name=".task.Tapper"
-            android:label="@string/title_activity_tapper">
+            android:label="@string/title_activity_tapper"
+            android:screenOrientation="portrait">
         </activity>
         <activity
                 android:name=".task.Backwards"
-                android:label="@string/title_activity_backwards">
+                android:label="@string/title_activity_backwards"
+                android:screenOrientation="portrait">
         </activity>
         <activity
                 android:name=".punishments.SendSMS"
-                android:label="@string/title_activity_send_sms">
+                android:label="@string/title_activity_send_sms"
+                android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".management.AlarmDetailsActivity"/>
+        <activity android:name=".management.AlarmDetailsActivity"
+            android:screenOrientation="portrait"/>
         
-        <activity android:name=".management.SettingsActivity"/>
+        <activity android:name=".management.SettingsActivity"
+            android:screenOrientation="portrait"/>
         
         <activity android:name=".task.ShakeActivity" 
-            	  android:label="@string/title_activity_shake"/>
-        <activity android:name=".punishments.FaggotDetector" />
+            	  android:label="@string/title_activity_shake"
+            	  android:screenOrientation="portrait"/>
+        <activity android:name=".punishments.FaggotDetector"
+            android:screenOrientation="portrait" />
 
-        <receiver android:name=".management.SetAlarmsOnBoot"/>
+        <receiver android:name=".management.SetAlarmsOnBoot"
+            android:screenOrientation="portrait"/>
         
-        <receiver android:name=".management.AlarmReceiver"/>
+        <receiver android:name=".management.AlarmReceiver"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
