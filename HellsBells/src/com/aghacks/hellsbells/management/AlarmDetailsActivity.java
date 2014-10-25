@@ -1,6 +1,9 @@
 package com.aghacks.hellsbells.management;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,6 +17,7 @@ import com.aghacks.hellsbells.domain.Alarm;
 import com.aghacks.hellsbells.domain.AlarmOccurrence;
 import com.aghacks.hellsbells.domain.DayOfWeek;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -119,6 +123,17 @@ public class AlarmDetailsActivity extends Activity {
         alarm.setOccurrence(occurrence);
 
         AlarmRepository.save(this, alarm);
+
+        if (alarm.isActive()) {
+            AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+            Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
+            PendingIntent alarmIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+
+            for (Calendar calOccurrence : alarm.getNearestOccurrences()) {
+                alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, calOccurrence.getTimeInMillis(),
+                        AlarmManager.INTERVAL_DAY * 7, alarmIntent);
+            }
+        }
 
         Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
     }
