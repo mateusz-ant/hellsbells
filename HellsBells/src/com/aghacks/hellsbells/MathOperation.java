@@ -13,65 +13,65 @@ public class MathOperation extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_math_operation);
-		
+
 		TextView answer = (TextView) findViewById(R.id.textView2);
-		Button button= (Button) findViewById(R.id.button1);
-		
+		Button button = (Button) findViewById(R.id.button1);
+
 		Random r = new Random();
 		int number1;
 		int number2;
 		final int result;
-		
-		do{
+
+		do {
 			number1 = r.nextInt(10 - 1) + 1;
 			number2 = r.nextInt(10 - 1) + 1;
-		}
-		while(number1 < number2);
-		
+		} while (number1 < number2);
+
 		int operation = r.nextInt(3 - 1) + 1;
-		
-		switch(operation){
-			case 1: 	result = number1 + number2; 
-						answer.setText(number1+"+"+number2);
-						break;
-			case 2: 	result = number1 - number2;
-						answer.setText(number1+"-"+number2);
-						break;
-			case 3: 	result = number1 * number2; 
-						answer.setText(number1+"*"+number2);
-						break;
-			default: 	result = number1 + number2; 
-						answer.setText(number1+"+"+number2);
+
+		switch (operation) {
+		case 1:
+			result = number1 + number2;
+			answer.setText(number1 + "+" + number2);
+			break;
+		case 2:
+			result = number1 - number2;
+			answer.setText(number1 + "-" + number2);
+			break;
+		case 3:
+			result = number1 * number2;
+			answer.setText(number1 + "*" + number2);
+			break;
+		default:
+			result = number1 + number2;
+			answer.setText(number1 + "+" + number2);
 		}
-		
 		
 		button.setOnClickListener(new View.OnClickListener() {
-		    @Override
-		    public void onClick(View v) {
-		    	
-		    	EditText textfield = (EditText) findViewById(R.id.answer);
-		    	TextView answer = (TextView) findViewById(R.id.textView1);
+			@Override
+			public void onClick(View v) {
+
+				EditText textfield = (EditText) findViewById(R.id.answer);
+				TextView answer = (TextView) findViewById(R.id.textView1);
 				int text = Integer.parseInt(textfield.getText().toString());
-				
-				if(text == result){
+
+				if (text == result) {
 					finish();
-				}
-				else
+				} else {
 					answer.setText("Try again!");
-		    }
+				}
+			}
 		});
-		
-		
-		
+
 	}
-	
+
 	@Override
-    protected void onDestroy() {
+	protected void onDestroy() {
 		setResult(RESULT_OK);
 		super.onDestroy();
-    }
-	
+	}
+
 }
