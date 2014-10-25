@@ -4,4 +4,7 @@
     <item android:id="@+id/alarm_list_add"
           android:title="Add"
           android:showAsAction="ifRoom"/>
+    <item android:id="@+id/alarm_list_preferences"
+          android:title="Preferences"
+          android:showAsAction="never"/>
 </menu>

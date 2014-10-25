@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="General">
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Tasks"
+                        android:summary="How to turn off the alarm"
+                        android:layout="@layout/preference_category_summary">
+        <CheckBoxPreference
+                android:title="Siara"
+                android:summary="So you think you can tell heaven from hell"
+                android:key="task_siara_enabled"
+                android:defaultValue="true"/>
+        <CheckBoxPreference
+                android:title="Shake your phone"
+                android:key="task_shake_enabled"
+                android:defaultValue="true"/>
+        <CheckBoxPreference
+                android:title="Tap"
+                android:summary="Tap on images randomly appearing on the screen"
+                android:key="task_tap_enabled"
+                android:defaultValue="true"/>
+        <CheckBoxPreference
+                android:title="Flip"
+                android:summary="Flip your smartphone"
+                android:key="task_flip_enabled"
+                android:defaultValue="true"/>
+        <CheckBoxPreference
+                android:title="Text backwards"
+                android:summary="Rewrite text backwards"
+                android:key="task_backwards_enabled"
+                android:defaultValue="true"/>
+        <CheckBoxPreference
+                android:title="Arithmetic operation"
+                android:summary="Solve simple arithmetic operation"
+                android:key="task_arithmetic_enabled"
+                android:defaultValue="true"/>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Punishments"
+                        android:summary="One of enabled punishments will be applied if you don't solve your task!"
+                        android:layout="@layout/preference_category_summary">
+        <CheckBoxPreference
+                android:title="Sms"
+                android:summary="Send sms to random person"
+                android:key="punishment_sms_enabled"
+                android:defaultValue="true"/>
+        <CheckBoxPreference
+                android:title="Download data via the Internet"
+                android:key="punishment_inet_download_enabled"
+                android:defaultValue="true"/>
+        <CheckBoxPreference
+                android:title="Flashlight"
+                android:key="punishment_flashlight_enabled"
+                android:defaultValue="true"/>
+        <CheckBoxPreference
+                android:title="Annoying sounds"
+                android:key="punishment_sounds_enabled"
+                android:defaultValue="true"/>
+        <CheckBoxPreference
+                android:title="Rick Astley wallpaper"
+                android:key="punishment_rickroll_enabled"
+                android:defaultValue="true"/>
+    </PreferenceCategory>
+</PreferenceScreen>

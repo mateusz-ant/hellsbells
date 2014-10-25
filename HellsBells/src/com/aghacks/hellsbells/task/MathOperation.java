@@ -1,4 +1,4 @@
-package com.aghacks.hellsbells;
+package com.aghacks.hellsbells.task;
 
 import java.util.Random;
 
@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.aghacks.hellsbells.R;
 
 public class MathOperation extends Activity {
 
@@ -51,20 +53,26 @@ public class MathOperation extends Activity {
 			result = number1 + number2;
 			answer.setText(number1 + "+" + number2);
 		}
-		
+
 		button.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 
 				EditText textfield = (EditText) findViewById(R.id.answer);
 				TextView answer = (TextView) findViewById(R.id.textView1);
-				int text = Integer.parseInt(textfield.getText().toString());
 
-				if (text == result) {
-					finish();
-				} else {
+				try {
+					int text = Integer.parseInt(textfield.getText().toString());
+
+					if (text == result) {
+						finish();
+					} else {
+						answer.setText("Try again!");
+					}
+				} catch (NumberFormatException e) {
 					answer.setText("Try again!");
 				}
+
 			}
 		});
 
