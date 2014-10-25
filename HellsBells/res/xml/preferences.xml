@@ -2,9 +2,10 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:title="General">
-        <RingtonePreference android:title="Ringtone" />
+        <RingtonePreference android:title="Ringtone"
+                            android:key="ringtone" />
         <EditTextPreference android:title="Task time"
-                            android:summary="`Time to accomplish task"
+                            android:summary="Time to accomplish task"
                             android:inputType="number"
                             android:defaultValue="60"/>
     </PreferenceCategory>
