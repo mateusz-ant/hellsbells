@@ -1,16 +1,15 @@
 package com.aghacks.hellsbells;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.content.SharedPreferences;
+import android.content.*;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 import com.aghacks.hellsbells.punishments.PunishmentService;
 import com.aghacks.hellsbells.task.*;
 
@@ -26,13 +25,13 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         if (getIntent().getStringExtra("dupA").equals("dupaDUPA")) {
-        	SharedPreferences pref = PreferenceManager
+            SharedPreferences pref = PreferenceManager
                     .getDefaultSharedPreferences(getApplicationContext());
             String strRingtonePreference = pref.getString("ringtone", "DEFAULT_SOUND");
             Uri sound = Uri.parse(strRingtonePreference);
-         	r = RingtoneManager.getRingtone(getApplicationContext(), sound);
+            r = RingtoneManager.getRingtone(getApplicationContext(), sound);
             r.play();
-            
+
             LinkedList<Class> tasks = new LinkedList<Class>();
             if (pref.getBoolean("task_siara_enabled", false)) {
                 tasks.add(SiaraActivity.class);
@@ -68,13 +67,24 @@ public class MainActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         r.stop();
         if (resultCode == RESULT_OK) {
-            
+
             finish();
         } else {
             Intent intent = new Intent(this, PunishmentService.class);
+
+            bindService(intent, new ServiceConnection() {
+                @Override
+                public void onServiceConnected(ComponentName name, IBinder service) {
+
+                }
+
+                @Override
+                public void onServiceDisconnected(ComponentName name) {
+
+                }
+            }, Context.BIND_AUTO_CREATE);
             finish();
-            this.startService(intent);
-            
+
 
         }
         super.onActivityResult(requestCode, resultCode, data);

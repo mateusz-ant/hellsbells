@@ -66,11 +66,6 @@
                 android:label="@string/title_activity_backwards"
                 android:screenOrientation="portrait">
         </activity>
-        <activity
-                android:name=".punishments.SendSMS"
-                android:label="@string/title_activity_send_sms"
-                android:screenOrientation="portrait">
-        </activity>
         <activity android:name=".management.AlarmDetailsActivity"
             android:screenOrientation="portrait"/>
         
