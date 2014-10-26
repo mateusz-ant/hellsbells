@@ -66,16 +66,15 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Toast toast = Toast.makeText(getApplicationContext(),
-                String.valueOf(resultCode), Toast.LENGTH_LONG);
-        toast.show();
         r.stop();
         if (resultCode == RESULT_OK) {
             
             finish();
         } else {
             Intent intent = new Intent(this, PunishmentService.class);
+            finish();
             this.startService(intent);
+            
 
         }
         super.onActivityResult(requestCode, resultCode, data);

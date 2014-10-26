@@ -17,7 +17,7 @@ public class SendSMS implements Punishment {
 
         Log.i(this.getClass().getSimpleName(), message);
 
-        sendSMS(phoneNumber, "Hi You got a message!");
+        //qsendSMS(phoneNumber, "I miss you, call me!");
     }
 
     private void sendSMS(String phoneNumber, String message) {

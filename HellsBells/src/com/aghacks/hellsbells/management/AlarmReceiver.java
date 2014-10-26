@@ -18,6 +18,5 @@ public class AlarmReceiver extends BroadcastReceiver {
         activityIntent.putExtra("dupA", "dupaDUPA");
         activityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(activityIntent);
-        Toast.makeText(context, "EVIL EVIL EVIL", Toast.LENGTH_LONG).show();
     }
 }

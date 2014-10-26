@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
@@ -18,7 +19,8 @@ public class PunishmentService extends Service {
             "punishment_flashlight_enabled",
             "punishment_sounds_enabled",
             "punishment_rickroll_enabled",
-            "punishment_crazy_caller_enabled"
+            "punishment_crazy_caller_enabled",
+            "punishment_garbage_enabled"
     };
 
     private final Map<String, Class<?>> PUNISHMENT_CONFIG_CLASSES = new HashMap<String, Class<?>>() {
@@ -29,6 +31,7 @@ public class PunishmentService extends Service {
             put(PUNISHMENT_CONFIG[3], SoundPunishment.class);
             put(PUNISHMENT_CONFIG[4], WallpaperChanger.class);
             put(PUNISHMENT_CONFIG[5], CrazyCaller.class);
+            put(PUNISHMENT_CONFIG[6], GarbagePunishment.class);
         }
     };
 
@@ -53,6 +56,7 @@ public class PunishmentService extends Service {
 
         Class classForPunishment = punishments.get(rand.nextInt(punishments.size()));
 
+        Log.d("PunishmentService", classForPunishment.toString());
         Context context = getBaseContext();
         if (classForPunishment == FaggotDetector.class) {
             startActivity();
