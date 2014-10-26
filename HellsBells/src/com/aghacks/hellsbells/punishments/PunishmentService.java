@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Binder;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -12,6 +13,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 public class PunishmentService extends Service {
+
+    private Binder binder = new Binder();
 
     private final String[] PUNISHMENT_CONFIG = {
             "punishment_sms_enabled",
@@ -38,31 +41,6 @@ public class PunishmentService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        Random rand = new Random(new Date().getTime());
-
-        SharedPreferences pref = PreferenceManager
-                .getDefaultSharedPreferences(getApplicationContext());
-
-        ArrayList<Class> punishments = new ArrayList<Class>();
-        for (String punishmentKey : PUNISHMENT_CONFIG) {
-            if (pref.getBoolean(punishmentKey, false)) {
-                punishments.add(PUNISHMENT_CONFIG_CLASSES.get(punishmentKey));
-            }
-        }
-
-        if (punishments.isEmpty()) {
-            return;
-        }
-
-        Class classForPunishment = punishments.get(rand.nextInt(punishments.size()));
-
-        Log.d("PunishmentService", classForPunishment.toString());
-        Context context = getBaseContext();
-        if (classForPunishment == FaggotDetector.class) {
-            startActivity();
-        } else {
-            punish(classForPunishment, context);
-        }
     }
 
     private void punish(Class classForPunishment, Context context) {
@@ -89,7 +67,33 @@ public class PunishmentService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        return null;
+        Random rand = new Random(new Date().getTime());
+
+        SharedPreferences pref = PreferenceManager
+                .getDefaultSharedPreferences(getApplicationContext());
+
+        ArrayList<Class> punishments = new ArrayList<Class>();
+        for (String punishmentKey : PUNISHMENT_CONFIG) {
+            if (pref.getBoolean(punishmentKey, false)) {
+                punishments.add(PUNISHMENT_CONFIG_CLASSES.get(punishmentKey));
+            }
+        }
+
+        if (punishments.isEmpty()) {
+            return binder;
+        }
+
+        Class classForPunishment = punishments.get(rand.nextInt(punishments.size()));
+
+        Log.d("PunishmentService", classForPunishment.toString());
+        Context context = getBaseContext();
+        if (classForPunishment == FaggotDetector.class) {
+            startActivity();
+        } else {
+            punish(classForPunishment, context);
+        }
+
+        return binder;
     }
 
 

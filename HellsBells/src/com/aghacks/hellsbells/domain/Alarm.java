@@ -77,7 +77,7 @@ public class Alarm implements Serializable {
             calendar.add(Calendar.DAY_OF_MONTH, dayDiff);
 
             if (calendar.getTimeInMillis() < Calendar.getInstance().getTimeInMillis()) {
-                calendar.add(Calendar.DAY_OF_MONTH, allOf(DayOfWeek.class).size());
+//                calendar.add(Calendar.DAY_OF_MONTH, allOf(DayOfWeek.class).size());
             }
 
             calendars.add(calendar);
